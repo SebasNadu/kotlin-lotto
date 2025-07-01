@@ -4,7 +4,6 @@ import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 
-
 class LottoTest {
     @Test
     fun `Illegal Lotto`() {
@@ -19,11 +18,12 @@ class LottoTest {
         assertThat(Lotto(ticket))
     }
 
-
     @Test
-    fun `Lotto has 6 numbers 2`() {
+    fun `Lotto has 6 not unique numbers`() {
         val ticket = listOf(1, 1, 2, 3, 4, 5)
-        assertThat(Lotto(ticket))
+        assertThrows<IllegalArgumentException> {
+            Lotto(ticket)
+        }
     }
 }
 

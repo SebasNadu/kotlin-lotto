@@ -44,16 +44,16 @@
 ### InputView
 
 - [x] Get input
-    - [x] Please enter the purchase amount.
-    - [x] Please enter last week’s winning numbers.
-    - [x] Please enter the bonus number.
+  - [x] Please enter the purchase amount.
+  - [x] Please enter last week’s winning numbers.
+  - [x] Please enter the bonus number.
 
 ### OutputView
 
 - [x] Print out the purchased tickets
 - [x] lotto statistics
-    - [x] lotto statistics with prices
-    - [x] print lotto statistics
+  - [x] lotto statistics with prices
+  - [x] print lotto statistics
 
 ### refactors
 

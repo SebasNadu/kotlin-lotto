@@ -3,9 +3,6 @@ package domain
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
-import org.junit.jupiter.params.ParameterizedTest
-import org.junit.jupiter.params.provider.CsvSource
-import org.junit.jupiter.params.provider.ValueSource
 
 
 class LottoTest {
@@ -14,6 +11,19 @@ class LottoTest {
         assertThrows<IllegalArgumentException> {
             Lotto()
         }
+    }
+
+    @Test
+    fun `Lotto has 6 numbers`() {
+        val ticket = listOf(1, 2, 3, 4, 5, 6)
+        assertThat(Lotto(ticket))
+    }
+
+
+    @Test
+    fun `Lotto has 6 numbers 2`() {
+        val ticket = listOf(1, 1, 2, 3, 4, 5)
+        assertThat(Lotto(ticket))
     }
 }
 

@@ -14,6 +14,20 @@
 ### Rank
 - [x] return valid Rank depend on match count, bonus number and if required
 - [x] implement valueOf
-- 
+
+### Controller
+- [ ] Add the controller where happen the flow of the app
+- [ ] Use View classes for input and output
+- [ ] Create a retry help functions to validate de input and in case of error retry it.
+- [ ] Create a method or service to create the Lotto tickets
+
+### View
+- [ ] Get input
+  - [ ] Please enter the purchase amount.
+  - [ ] Please enter last week’s winning numbers.
+  - [ ] Please enter the bonus number.
+- [ ]Print out the purchased tickets
+
+
 - [ ] lotto statistics with prices
 - [ ] print lotto statistics

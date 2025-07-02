@@ -6,4 +6,8 @@ class Lotto(val numbers: List<Int> = emptyList<Int>()) {
         require(numbers.distinct().size == 6)
         require(numbers.all { it in 1..45 })
     }
+
+    override fun toString(): String {
+        return numbers.joinToString(", ", "[", "]")
+    }
 }

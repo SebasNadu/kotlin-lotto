@@ -1,7 +1,6 @@
 # kotlin-lotto
 
 ## Features
-
 ### Lotto Class
 - [x] 6 unique numbers
 - [x] in range 1 - 45 
@@ -36,6 +35,6 @@
 
 ###  OutputView
 - [x] Print out the purchased tickets
-- [ ] lotto statistics
-  - [ ] lotto statistics with prices
-  - [ ] print lotto statistics
+- [x] lotto statistics
+  - [x] lotto statistics with prices
+  - [x] print lotto statistics

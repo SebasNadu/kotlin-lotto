@@ -2,43 +2,26 @@ package services
 
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
-
+import org.junit.jupiter.params.ParameterizedTest
+import org.junit.jupiter.params.provider.ValueSource
 class LottoServiceTest {
-    @Test
-    fun `amount should equal or bigger than Ticket price`() {
+
+
+    @ValueSource(ints = [TICKET_PRICE, TICKET_PRICE * 2, TICKET_PRICE * 3 ])
+    @ParameterizedTest
+    fun `return true if ticket price is valid`(ticketPrice: Int) {
         assertThat(
-            LottoService.purchaseAmountValidator(TICKET_PRICE)
+            LottoService.purchaseAmountValidator(ticketPrice)
         ).isEqualTo(true)
     }
 
-    @Test
-    fun `amount should be enough to purchase at least 1 ticket`() {
+    @ValueSource(ints = [TICKET_PRICE - 1, TICKET_PRICE + 1, TICKET_PRICE * 2 + 1 ])
+    @ParameterizedTest
+    fun `return false if ticket price is invalid`(ticketPrice: Int) {
         assertThat(
-            LottoService.purchaseAmountValidator(TICKET_PRICE * 2)
-        ).isEqualTo(true)
-    }
-
-    @Test
-    fun `amount should be divisible for a ticket price`() {
-        assertThat(
-            LottoService.purchaseAmountValidator(TICKET_PRICE * 2)
-        ).isEqualTo(true)
-    }
-
-    @Test
-    fun `return false if amount not equal or bigger than Ticket price`() {
-        assertThat(
-            LottoService.purchaseAmountValidator(TICKET_PRICE - 1)
+            LottoService.purchaseAmountValidator(ticketPrice)
         ).isEqualTo(false)
     }
-
-    @Test
-    fun `return false if amount not divisible for a ticket price`() {
-        assertThat(
-            LottoService.purchaseAmountValidator(TICKET_PRICE * 2 + 1)
-        ).isEqualTo(false)
-    }
-
 
     companion object {
         private const val TICKET_PRICE = 1000

@@ -2,13 +2,11 @@ package util
 
 object LottoUtils {
     fun <T> retry(
-        get: () -> T,
-        validator: (T) -> Boolean
+        block: () -> T,
     ): T {
         while (true) {
             try {
-                val input = get()
-                if (validator(input)) return input
+                block()
             } catch (e: IllegalArgumentException) {
                 println(e.message)
             }

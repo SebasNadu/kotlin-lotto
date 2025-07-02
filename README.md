@@ -1,10 +1,15 @@
 # kotlin-lotto
 
+## Features
+
 - [ ] minimum ticket: 1000 KRW
+### Lotto Class
 - [x] 6 unique numbers
 - [x] in range 1 - 45 
-- [ ] Lotto instance has toString
-- [ ] 1 bonus unique number
-- [ ] valid lotto tickets
+- [x] Lotto instance has toString
+### WinningNumbers Class
+- [x] valid lotto tickets inside winning numbers class
+- [x] valid 1 bonus unique number inside winning numbers class
+
 - [ ] lotto statistics with prices
 - [ ] print lotto statistics

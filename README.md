@@ -41,7 +41,7 @@
 
 
 ## refactors
-- [ ] create Const value, no magic number
+- [x] create Const value, no magic number
 - [ ] add more test
   - [ ] **add E2E test**
 - [ ] customize exception for DRY

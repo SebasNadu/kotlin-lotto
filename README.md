@@ -38,3 +38,13 @@
 - [x] lotto statistics
   - [x] lotto statistics with prices
   - [x] print lotto statistics
+
+
+## refactors
+- [ ] create Const value, no magic number
+- [ ] add more test
+  - [ ] **add E2E test**
+- [ ] customize exception for DRY
+- [ ] add documentation
+- [ ] separate controller logics
+- [ ] refactor methods

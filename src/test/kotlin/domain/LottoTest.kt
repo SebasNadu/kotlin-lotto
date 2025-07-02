@@ -39,5 +39,11 @@ class LottoTest {
             Lotto(ticket)
         }
     }
+
+    @Test
+    fun `Lotto to string with the correct format`() {
+        val ticket = Lotto(listOf(1, 2, 3, 4, 5, 6))
+        assertThat(ticket.toString()).isEqualTo("[1, 2, 3, 4, 5, 6]")
+    }
 }
 

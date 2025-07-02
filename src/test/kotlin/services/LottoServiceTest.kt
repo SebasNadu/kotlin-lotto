@@ -25,6 +25,21 @@ class LottoServiceTest {
         ).isEqualTo(true)
     }
 
+    @Test
+    fun `return false if amount not equal or bigger than Ticket price`() {
+        assertThat(
+            LottoService.purchaseAmountValidator(TICKET_PRICE - 1)
+        ).isEqualTo(false)
+    }
+
+    @Test
+    fun `return false if amount not divisible for a ticket price`() {
+        assertThat(
+            LottoService.purchaseAmountValidator(TICKET_PRICE * 2 + 1)
+        ).isEqualTo(false)
+    }
+
+
     companion object {
         private const val TICKET_PRICE = 1000
     }

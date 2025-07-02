@@ -25,5 +25,19 @@ class LottoTest {
             Lotto(ticket)
         }
     }
+
+    @Test
+    fun `Lotto numbers are in range`() {
+        val ticket = listOf(1, 2, 3, 4, 5, 45)
+        assertThat(Lotto(ticket))
+    }
+
+    @Test
+    fun `Lotto numbers are not in range`() {
+        val ticket = listOf(1, 100, 2, 3, 4, 5)
+        assertThrows<IllegalArgumentException> {
+            Lotto(ticket)
+        }
+    }
 }
 

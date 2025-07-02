@@ -1,11 +1,11 @@
 package services
 
 import domain.Lotto
-import kotlin.random.Random
 
 object LottoService {
-    fun purchaseAmountValidator(amount: Int): Boolean {
-        return amount >= 1000 && amount % 1000 == 0
+    fun purchaseAmountValidator(amount: Int) {
+        if (amount < 1000 || amount % 1000 != 0)
+            throw IllegalArgumentException()
     }
 
     fun generateLottoTickets(amount: Int): List<Lotto> {

@@ -23,7 +23,7 @@
 
 ### View
 - [ ] Get input
-  - [ ] Please enter the purchase amount.
+  - [x] Please enter the purchase amount.
   - [ ] Please enter last week’s winning numbers.
   - [ ] Please enter the bonus number.
 - [ ]Print out the purchased tickets

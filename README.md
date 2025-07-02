@@ -18,13 +18,15 @@
 ### Controller
 - [x] Add the controller where happen the flow of the app
 - [x] Use View classes for input and output
-- [ ] Create a retry help functions to validate de input and in case of error retry it.
-- [ ] Create a method or service to create the Lotto tickets
-- [ ] Create retry helper function to get user input
+- [x] Create a retry help functions to validate de input and in case of error retry it.
+- [x] Create a method or service to create the Lotto tickets
+- [x] Create retry helper function to get user input
+- [x] Add a generateLottoTickets service
 
 ### Services
-- [ ] add Lotto service
-- [ ] add Validator for the purchase amount user input
+- [x] add Lotto service
+- [x] add Validator for the purchase amount user input
+- [x] Add a service to generate the lotto tickets from the amount passed
 
 ### View
 - [ ] Get input

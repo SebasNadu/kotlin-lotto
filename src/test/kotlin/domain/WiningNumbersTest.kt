@@ -45,15 +45,19 @@ class WiningNumbersTest {
 
     }
 
+    @Test
     fun `throw if bonus number is not in range 1 to 45`() {
         assertThrows<IllegalArgumentException> {
-            WiningNumbers()
+            val winningNumbers = listOf(1, 2, 3, 4, 5, 6)
+            WiningNumbers(winningNumbers, 100)
         }
     }
 
+    @Test
     fun `do not throw if Winningnumbers have 6 winning numbers and bonus number`() {
         assertDoesNotThrow {
-            WiningNumbers()
+            val winningNumbers = listOf(1, 2, 3, 4, 5, 6)
+            WiningNumbers(winningNumbers, 7)
         }
     }
 

@@ -22,6 +22,10 @@
 - [ ] Create a method or service to create the Lotto tickets
 - [ ] Create retry helper function to get user input
 
+### Services
+- [ ] add Lotto service
+- [ ] add Validator for the purchase amount user input
+
 ### View
 - [ ] Get input
   - [x] Please enter the purchase amount.

@@ -6,6 +6,19 @@ object InputView {
         return readln().trim().toIntOrNull() ?: throw IllegalArgumentException()
     }
 
+    fun getWinningNumbers(): List<Int> {
+        println(Constants.WINNING_NUMBERS_PROMPT)
+        return readln()
+            .split(',')
+            .map { it.trim().toIntOrNull()
+                ?:  throw IllegalArgumentException()}
+    }
+
+    fun getBonusNumber(): Int {
+        println(Constants.BONUS_NUMBER_PROMPT)
+        return readln().trim().toIntOrNull() ?: throw IllegalArgumentException()
+    }
+
     object Constants {
         const val PURCHASE_PROMPT = "Please enter the purchase amount."
         const val WINNING_NUMBERS_PROMPT = "Please enter last week’s winning numbers."

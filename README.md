@@ -2,7 +2,6 @@
 
 ## Features
 
-- [ ] minimum ticket: 1000 KRW
 ### Lotto Class
 - [x] 6 unique numbers
 - [x] in range 1 - 45 
@@ -27,12 +26,13 @@
 - [x] add Lotto service
 - [x] add Validator for the purchase amount user input
 - [x] Add a service to generate the lotto tickets from the amount passed
+- [x] minimum ticket: 1000 KRW
 
 ### InputView
-- [ ] Get input
+- [x] Get input
   - [x] Please enter the purchase amount.
-  - [ ] Please enter last week’s winning numbers.
-  - [ ] Please enter the bonus number.
+  - [x] Please enter last week’s winning numbers.
+  - [x] Please enter the bonus number.
 
 ###  OutputView
 - [x] Print out the purchased tickets

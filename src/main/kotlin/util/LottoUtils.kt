@@ -6,7 +6,7 @@ object LottoUtils {
     ): T {
         while (true) {
             try {
-                block()
+                return block()
             } catch (e: IllegalArgumentException) {
                 println(e.message)
             }

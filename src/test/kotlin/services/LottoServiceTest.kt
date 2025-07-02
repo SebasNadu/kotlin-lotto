@@ -2,25 +2,27 @@ package services
 
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.assertDoesNotThrow
+import org.junit.jupiter.api.assertThrows
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.ValueSource
-class LottoServiceTest {
 
+class LottoServiceTest {
 
     @ValueSource(ints = [TICKET_PRICE, TICKET_PRICE * 2, TICKET_PRICE * 3 ])
     @ParameterizedTest
-    fun `return true if ticket price is valid`(ticketPrice: Int) {
-        assertThat(
+    fun `dose not throw if ticket price is valid`(ticketPrice: Int) {
+        assertDoesNotThrow {
             LottoService.purchaseAmountValidator(ticketPrice)
-        ).isEqualTo(true)
+        }
     }
 
     @ValueSource(ints = [TICKET_PRICE - 1, TICKET_PRICE + 1, TICKET_PRICE * 2 + 1 ])
     @ParameterizedTest
-    fun `return false if ticket price is invalid`(ticketPrice: Int) {
-        assertThat(
+    fun `throw if ticket price is invalid`(ticketPrice: Int) {
+        assertThrows<IllegalArgumentException> {
             LottoService.purchaseAmountValidator(ticketPrice)
-        ).isEqualTo(false)
+        }
     }
 
     @Test

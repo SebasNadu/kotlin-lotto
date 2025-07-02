@@ -23,6 +23,13 @@ class LottoServiceTest {
         ).isEqualTo(false)
     }
 
+    @Test
+    fun `generate valid lotto tickets list`() {
+        assertThat(LottoService.generateLottoTickets(TICKET_PRICE * 2).size)
+            .isEqualTo(TICKET_PRICE * 2 / TICKET_PRICE)
+    }
+
+
     companion object {
         private const val TICKET_PRICE = 1000
     }

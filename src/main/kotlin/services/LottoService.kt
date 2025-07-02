@@ -5,16 +5,18 @@ import domain.Rank
 import domain.WinningNumbers
 
 object LottoService {
+    private const val ZERO = 0.0
+
     fun purchaseAmountValidator(amount: Int) {
-        if (amount < 1000 || amount % 1000 != 0)
+        if (amount < Lotto.PRICE_OF_TICKET || amount % Lotto.PRICE_OF_TICKET != 0)
             throw IllegalArgumentException()
     }
 
     fun generateLottoTickets(amount: Int): List<Lotto> {
-        val numberTickets = amount / 1000
+        val numberTickets = amount / Lotto.PRICE_OF_TICKET
         val lottoTickets: MutableList<Lotto> = mutableListOf()
         repeat(numberTickets) {
-            val numbers = generateRandomNumbers(6)
+            val numbers = generateRandomNumbers(Lotto.MIN_SIZE)
             lottoTickets.add(Lotto(numbers))
         }
         return lottoTickets
@@ -22,7 +24,7 @@ object LottoService {
 
     fun generateRandomNumbers(size: Int): List<Int> {
         val numbers = mutableListOf<Int>()
-        for (i in 1..45) {
+        for (i in Lotto.MAX_RANGE..Lotto.MAX_RANGE) {
             numbers.add(i)
         }
         numbers.shuffle()
@@ -36,8 +38,8 @@ object LottoService {
     }
 
     fun calculateReturnRate(totalAmount: Int, results: List<Rank>): Double {
+
         val totalPrize = results.sumOf { it.winningMoney}
-        if (totalPrize == 0) return 0.0
-        return (totalPrize.toDouble() / totalAmount) * 100
+        return if (totalPrize == 0) ZERO else (totalPrize.toDouble() / totalAmount) * 100.0
     }
 }

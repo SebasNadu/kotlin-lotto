@@ -23,7 +23,7 @@ object OutputView {
         val matchCount = results.count { it.countOfMatch == entry.countOfMatch}
         val hasBonus = if (entry.requiresBonus) " + Bonus Ball" else ""
         val winningMoney = "%,d".format(entry.winningMoney)
-        println("${entry.countOfMatch} Matches${hasBonus} ($winningMoney KRW) - $matchCount tickets")
+        println("${entry.countOfMatch} Matches${hasBonus} ($winningMoney ${Lotto.CURRENCY}) - $matchCount tickets")
     }
 
     /*

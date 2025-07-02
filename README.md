@@ -16,17 +16,18 @@
 - [x] implement valueOf
 
 ### Controller
-- [ ] Add the controller where happen the flow of the app
-- [ ] Use View classes for input and output
+- [x] Add the controller where happen the flow of the app
+- [x] Use View classes for input and output
 - [ ] Create a retry help functions to validate de input and in case of error retry it.
 - [ ] Create a method or service to create the Lotto tickets
+- [ ] Create retry helper function to get user input
 
 ### View
 - [ ] Get input
   - [x] Please enter the purchase amount.
   - [ ] Please enter last week’s winning numbers.
   - [ ] Please enter the bonus number.
-- [ ]Print out the purchased tickets
+- [ ] Print out the purchased tickets
 
 
 - [ ] lotto statistics with prices

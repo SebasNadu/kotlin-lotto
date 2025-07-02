@@ -28,13 +28,14 @@
 - [x] add Validator for the purchase amount user input
 - [x] Add a service to generate the lotto tickets from the amount passed
 
-### View
+### InputView
 - [ ] Get input
   - [x] Please enter the purchase amount.
   - [ ] Please enter last week’s winning numbers.
   - [ ] Please enter the bonus number.
-- [ ] Print out the purchased tickets
 
-
-- [ ] lotto statistics with prices
-- [ ] print lotto statistics
+###  OutputView
+- [x] Print out the purchased tickets
+- [ ] lotto statistics
+  - [ ] lotto statistics with prices
+  - [ ] print lotto statistics

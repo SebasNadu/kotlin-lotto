@@ -1,57 +1,59 @@
 package lotto.controller
 
 import lotto.domain.Lotto
-import lotto.domain.LottoMachine
-import lotto.domain.LottoNumber
-import lotto.domain.ResultAnalyzer
+import lotto.domain.Rank
 import lotto.domain.WinningCombination
-import lotto.exceptions.LottoException
+import lotto.services.LottoService
+import lotto.util.LottoUtils
 import lotto.view.InputView
 import lotto.view.OutputView
 
-class LottoController(val lottoMachine: LottoMachine = LottoMachine()) {
-    fun run() {
-        val (amount, lottoTickets) = getTickets()
+class LottoController {
 
-        OutputView.printTickets(lottoTickets)
+	fun run() {
+		val (amount, lottoTickets) = getTickets()
 
-        val winningCombination = getWinningCombination()
-        val ticketsResult = ResultAnalyzer.evaluateTickets(lottoTickets, winningCombination)
-        val returnRate = ResultAnalyzer.calculateReturnRate(amount, ticketsResult)
+		OutputView.printTickets(lottoTickets)
 
-        OutputView.printResult(ticketsResult, returnRate)
-    }
+		val winningCombination = getWinningCombination()
+		val (result, returnRate) = getEvaluationResult(lottoTickets, winningCombination, amount)
 
-    private fun getTickets(): Pair<Int, List<Lotto>> {
-        val amount =
-            retryUntilSuccess {
-                InputView.getPurchaseAmount().also { lottoMachine.validatePurchase(it) }
-            }
+		OutputView.printResult(result, returnRate)
+	}
 
-        val lottoTickets = lottoMachine.purchase(amount)
-        return Pair(amount, lottoTickets)
-    }
+	private fun getEvaluationResult(
+		lottoTickets: List<Lotto>,
+		winningCombination: WinningCombination,
+		amount: Int
+	): Pair<List<Rank>, Double> {
+		val result = evaluateTickets(lottoTickets, winningCombination)
+		val returnRate = LottoService.calculateReturnRate(amount, result)
+		return Pair(result, returnRate)
+	}
 
-    private fun getWinningCombination(): WinningCombination {
-        val winningLotto = retryUntilSuccess { Lotto.fromInts(InputView.getWinningNumbers()) }
-        val winningCombination =
-            retryUntilSuccess {
-                WinningCombination(winningLotto, LottoNumber.from(InputView.getBonusNumber()))
-            }
-        return winningCombination
-    }
+	private fun getWinningCombination(): WinningCombination {
+		val winningTicket = LottoUtils.retryUntilSuccess { Lotto(InputView.getWinningNumbers()) }
+		val winningCombination = LottoUtils.retryUntilSuccess {
+			WinningCombination(winningTicket, InputView.getBonusNumber())
+		}
+		return winningCombination
+	}
 
-    /**
-     * Template function that accepts a lambda
-     * returns only in case of successfully
-     */
-    private fun <T> retryUntilSuccess(block: () -> T): T {
-        while (true) {
-            try {
-                return block()
-            } catch (e: LottoException) {
-                println(e.message)
-            }
-        }
-    }
+	private fun evaluateTickets(tickets: List<Lotto>, winningCombination: WinningCombination): List<Rank> {
+		val ranks = mutableListOf<Rank>()
+		for (ticket in tickets) {
+			val result = LottoService.getRankFrom(ticket, winningCombination)
+			ranks.add(result)
+		}
+		return ranks
+	}
+
+	private fun getTickets(): Pair<Int, List<Lotto>> {
+		val amount = LottoUtils.retryUntilSuccess({
+			InputView.getPurchaseAmount().also { LottoService.purchaseAmountValidator(it) }
+		})
+
+		val lottoTickets = LottoService.generateLottoTickets(amount)
+		return Pair(amount, lottoTickets)
+	}
 }

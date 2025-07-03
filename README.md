@@ -37,23 +37,27 @@
 ### InputView
 
 - [x] Get input
-  - [x] Please enter the purchase amount.
-  - [x] Please enter last week’s winning numbers.
-  - [x] Please enter the bonus number.
+    - [x] Please enter the purchase amount.
+    - [x] Please enter last week’s winning numbers.
+    - [x] Please enter the bonus number.
 
 ### OutputView
 
 - [x] Print out the purchased tickets
 - [x] lotto statistics
-  - [x] lotto statistics with prices
-  - [x] print lotto statistics
+    - [x] lotto statistics with prices
+    - [x] print lotto statistics
 
-## refactors
+### refactors
 
 - [x] create Const value, no magic number
-- [ ] add more test
-  - [ ] **add E2E test**
-- [ ] customize exception for DRY
-- [ ] add documentation
-- [ ] separate controller logics
-- [ ] refactor methods
+- [x] customize exception for DRY
+- [x] add documentation
+- [x] separate controller logics
+- [x] refactor methods
+
+---
+
+### TODOS
+
+- [ ] add **E2E test**

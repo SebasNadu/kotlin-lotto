@@ -20,3 +20,14 @@ class Lotto(val numbers: Set<LottoNumber>) {
         const val LOTTO_PICK_SIZE = 6
     }
 }
+
+/**
+ * Determines the rank of a Lotto ticket based on the winning numbers.
+ * Use Extension function here to separate the logic of determining rank from the Lotto class itself.
+ * This leaves the Lotto class focused on representing a ticket.
+ */
+fun Lotto.getRank(winningNumbers: WinningCombination): Rank {
+    val countOfMatch = this.numbers.count { it in winningNumbers.winningLotto.numbers }
+    val matchBonus = this.numbers.any { it == winningNumbers.bonusNumber }
+    return Rank.valueOf(countOfMatch, matchBonus)
+}

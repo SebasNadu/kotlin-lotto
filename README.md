@@ -5,8 +5,17 @@
 ### Lotto Class
 
 - [x] 6 unique numbers
-- [x] in range 1 - 45
 - [x] Lotto instance has toString
+
+### LottoNumber Class
+
+- [x] valid number in range 1 - 45
+
+### LottoMachine Class
+
+- [x] validate Purchase Amount
+- [x] generate Lotto tickets from the purchase amount
+- [x] minimum ticket: 1000 KRW
 
 ### WinningNumbers Class
 
@@ -26,13 +35,6 @@
 - [x] Create a method or service to create the Lotto tickets
 - [x] Create retry helper function to get user input
 - [x] Add a generateLottoTickets service
-
-### Services
-
-- [x] add Lotto service
-- [x] add Validator for the purchase amount user input
-- [x] Add a service to generate the lotto tickets from the amount passed
-- [x] minimum ticket: 1000 KRW
 
 ### InputView
 

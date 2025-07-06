@@ -9,7 +9,7 @@ class LottoMachine {
         return List(numberOfTickets) { generateTicket() }
     }
 
-    fun validatePurchase(amount: Int) {
+    private fun validatePurchase(amount: Int) {
         require(amount >= PRICE_OF_TICKET && amount % PRICE_OF_TICKET == 0) {
             throw InvalidAmountException(amount)
         }

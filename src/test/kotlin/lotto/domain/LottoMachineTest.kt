@@ -6,7 +6,6 @@ import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 
 class LottoMachineTest {
-
     private val machine = LottoMachine()
 
     @Test

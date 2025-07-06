@@ -6,7 +6,6 @@ import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 
 class LottoNumberTest {
-
     @Test
     fun `should create LottoNumber from valid value`() {
         val number = LottoNumber.from(10)

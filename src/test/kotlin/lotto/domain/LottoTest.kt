@@ -7,8 +7,7 @@ import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 
 class LottoTest {
-    private fun createLotto(vararg numbers: Int): Lotto =
-        Lotto(numbers.map(LottoNumber::from).toSet())
+    private fun createLotto(vararg numbers: Int): Lotto = Lotto(numbers.map(LottoNumber::from).toSet())
 
     @Test
     fun `should create lotto with valid numbers`() {

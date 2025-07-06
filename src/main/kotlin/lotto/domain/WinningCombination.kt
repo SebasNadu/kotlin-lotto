@@ -7,7 +7,8 @@ import lotto.exceptions.LottoException
  */
 class WinningCombination(val winningLotto: Lotto, val bonusNumber: LottoNumber) {
     init {
-        if (winningLotto.contains(bonusNumber))
+        if (winningLotto.contains(bonusNumber)) {
             throw LottoException.InvalidBonusNumberException(bonusNumber)
+        }
     }
 }

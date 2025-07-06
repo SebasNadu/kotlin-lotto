@@ -24,9 +24,9 @@ class LottoController(val lottoMachine: LottoMachine = LottoMachine()) {
 
     private fun getTickets(): Pair<Int, List<Lotto>> {
         val amount =
-            retryUntilSuccess({
+            retryUntilSuccess {
                 InputView.getPurchaseAmount().also { lottoMachine.validatePurchase(it) }
-            })
+            }
 
         val lottoTickets = lottoMachine.purchase(amount)
         return Pair(amount, lottoTickets)

@@ -8,18 +8,10 @@ import lotto.util.LottoUtils
  *  - contains 6 unique numbers
  *  - in range 1 to 45
  */
-class Lotto(val numbers: List<Int> = emptyList<Int>()) {
+class Lotto(val numbers: Set<LottoNumber>) {
     init {
         LottoUtils.requireOrThrow(
             numbers.size == LOTTO_PICK_SIZE,
-            LottoException.InvalidWinningNumbersException(),
-        )
-        LottoUtils.requireOrThrow(
-            numbers.distinct().size == LOTTO_PICK_SIZE,
-            LottoException.InvalidWinningNumbersException(),
-        )
-        LottoUtils.requireOrThrow(
-            numbers.all { LottoUtils.isInRange(it) },
             LottoException.InvalidWinningNumbersException(),
         )
     }
@@ -30,9 +22,7 @@ class Lotto(val numbers: List<Int> = emptyList<Int>()) {
 
     companion object {
         const val LOTTO_PICK_SIZE = 6
-        const val MIN_RANGE = 1
-        const val MAX_RANGE = 45
-        const val PRICE_OF_TICKET = 1000
+        const val PRICE_OF_TICKET = 1_000
         const val CURRENCY = "KRW"
     }
 }

@@ -6,9 +6,7 @@ import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 
 class WiningNumbersTest {
-
-    private fun createLotto(vararg numbers: Int): Lotto =
-        Lotto(numbers.map(LottoNumber::from).toSet())
+    private fun createLotto(vararg numbers: Int): Lotto = Lotto(numbers.map(LottoNumber::from).toSet())
 
     @Test
     fun `should throw if bonus number is duplicated in winning numbers`() {

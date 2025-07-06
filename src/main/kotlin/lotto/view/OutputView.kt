@@ -27,7 +27,6 @@ object OutputView {
         println("[ERROR]: $message")
     }
 
-
     private fun formatTicketHeader(count: Int): String {
         return "$TICKETS_NUMBERS_PROMPT $count ${pluralizeTicket(count)}."
     }

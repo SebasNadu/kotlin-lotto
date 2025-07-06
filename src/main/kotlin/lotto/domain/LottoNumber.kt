@@ -2,8 +2,7 @@ package lotto.domain
 
 import lotto.exceptions.LottoException.InvalidLottoNumberException
 
-class LottoNumber private constructor(private val value: Int): Comparable<LottoNumber> {
-
+class LottoNumber private constructor(private val value: Int) : Comparable<LottoNumber> {
     fun toInt(): Int = value
 
     override fun toString(): String = value.toString()

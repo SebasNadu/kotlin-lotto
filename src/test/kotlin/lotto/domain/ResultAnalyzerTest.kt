@@ -49,4 +49,30 @@ class ResultAnalyzerTest {
         )
         assertThat(rate).isEqualTo(550.0)
     }
+
+    @Test
+    fun `evaluateTickets should return correct ranks for full match`() {
+        val winning = Lotto((1..6).map { LottoNumber.from(it) }.toSet())
+        val tickets = listOf(
+            Lotto((1..6).map { LottoNumber.from(it) }.toSet()) // exact match
+        )
+        val winningCombination = WinningCombination(winning, LottoNumber.from(7))
+
+        val ranks = ResultAnalyzer.evaluateTickets(tickets, winningCombination)
+
+        assertThat(ranks).containsExactly(Rank.FIRST)
+    }
+
+    @Test
+    fun `evaluateTickets should return SECOND rank with 5 match plus bonus`() {
+        val winning = Lotto((1..6).map { LottoNumber.from(it) }.toSet())
+        val tickets = listOf(
+            Lotto((1..5).map { LottoNumber.from(it) }.toSet() + LottoNumber.from(7))
+        )
+        val winningCombination = WinningCombination(winning, LottoNumber.from(7))
+
+        val ranks = ResultAnalyzer.evaluateTickets(tickets, winningCombination)
+
+        assertThat(ranks).containsExactly(Rank.SECOND)
+    }
 }

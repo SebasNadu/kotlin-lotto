@@ -22,6 +22,10 @@ class Lotto(val numbers: Set<LottoNumber>) {
 
     companion object {
         const val LOTTO_PICK_SIZE = 6
+
+        fun fromInts(numbers: Set<Int>): Lotto {
+            return Lotto(numbers.map(LottoNumber::from).toSet())
+        }
     }
 }
 

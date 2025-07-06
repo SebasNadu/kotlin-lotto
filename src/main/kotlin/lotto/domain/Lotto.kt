@@ -1,7 +1,6 @@
 package lotto.domain
 
-import lotto.exceptions.LottoException
-import lotto.util.LottoUtils
+import lotto.exceptions.LottoException.InvalidLottoNumbersException
 
 /***
  * This Class represents a lotto ticket,
@@ -10,10 +9,7 @@ import lotto.util.LottoUtils
  */
 class Lotto(val numbers: Set<LottoNumber>) {
     init {
-        LottoUtils.requireOrThrow(
-            numbers.size == LOTTO_PICK_SIZE,
-            LottoException.InvalidWinningNumbersException(),
-        )
+        require(numbers.size == LOTTO_PICK_SIZE) { throw InvalidLottoNumbersException() }
     }
 
     override fun toString(): String {

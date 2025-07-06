@@ -1,6 +1,6 @@
 package lotto.domain
 
-import lotto.exceptions.LottoException.InvalidLottoNumber
+import lotto.exceptions.LottoException.InvalidLottoNumberException
 
 class LottoNumber private constructor(private val value: Int): Comparable<LottoNumber> {
 
@@ -19,7 +19,7 @@ class LottoNumber private constructor(private val value: Int): Comparable<LottoN
             (MINIMUM_NUMBER..MAXIMUM_NUMBER).associateWith(::LottoNumber)
 
         fun from(value: Int): LottoNumber {
-            return NUMBERS[value] ?: throw InvalidLottoNumber(value)
+            return NUMBERS[value] ?: throw InvalidLottoNumberException(value)
         }
     }
 }

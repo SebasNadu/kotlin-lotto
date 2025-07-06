@@ -1,48 +1,50 @@
 package lotto.domain
 
+import lotto.exceptions.LottoException.InvalidLottoNumberException
+import lotto.exceptions.LottoException.InvalidLottoNumbersException
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 
 class LottoTest {
-    @Test
-    fun `Illegal Lotto`() {
-        assertThrows<IllegalArgumentException> {
-            Lotto()
-        }
-    }
+    private fun createLotto(vararg numbers: Int): Lotto =
+        Lotto(numbers.map(LottoNumber::from).toSet())
 
     @Test
-    fun `Lotto has 6 numbers`() {
-        val ticket = listOf(1, 2, 3, 4, 5, 6)
-        assertThat(Lotto(ticket))
-    }
-
-    @Test
-    fun `Lotto has 6 not unique numbers`() {
-        val ticket = listOf(1, 1, 2, 3, 4, 5)
-        assertThrows<IllegalArgumentException> {
-            Lotto(ticket)
-        }
+    fun `should create lotto with valid numbers`() {
+        assertThat(createLotto(1, 2, 3, 4, 5, 6)).isInstanceOf(Lotto::class.java)
     }
 
     @Test
     fun `Lotto numbers are in range`() {
-        val ticket = listOf(1, 2, 3, 4, 5, 45)
-        assertThat(Lotto(ticket))
+        val lotto = createLotto(1, 45, 2, 3, 4, 5)
+        assertThat(lotto.numbers).hasSize(6)
     }
 
     @Test
-    fun `Lotto numbers are not in range`() {
-        val ticket = listOf(1, 100, 2, 3, 4, 5)
-        assertThrows<IllegalArgumentException> {
-            Lotto(ticket)
+    fun `should throw when lotto has not numbers`() {
+        assertThrows<InvalidLottoNumbersException> {
+            Lotto(emptySet())
         }
     }
 
     @Test
-    fun `Lotto to string with the correct format`() {
-        val ticket = Lotto(listOf(1, 2, 3, 4, 5, 6))
+    fun `should throw when lotto has duplicated numbers`() {
+        assertThrows<InvalidLottoNumbersException> {
+            createLotto(1, 1, 2, 3, 4, 5)
+        }
+    }
+
+    @Test
+    fun `should throw when lotto has numbers out of range`() {
+        assertThrows<InvalidLottoNumberException> {
+            createLotto(0, 46, 2, 3, 4, 5)
+        }
+    }
+
+    @Test
+    fun `should format to string correctly`() {
+        val ticket = createLotto(1, 2, 3, 4, 5, 6)
         assertThat(ticket.toString()).isEqualTo("[1, 2, 3, 4, 5, 6]")
     }
 }

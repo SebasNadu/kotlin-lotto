@@ -1,6 +1,7 @@
 package lotto.exceptions
 
 import lotto.domain.Lotto
+import lotto.domain.LottoMachine
 import lotto.domain.LottoNumber
 
 sealed class LottoException(msg: String) : IllegalArgumentException("[ERROR]: $msg") {
@@ -8,8 +9,8 @@ sealed class LottoException(msg: String) : IllegalArgumentException("[ERROR]: $m
 
     class InvalidAmountException(amount: Int) :
         LottoException(
-            "Wrong amount: $amount, Amount should be at least ${Lotto.PRICE_OF_TICKET} ${Lotto.CURRENCY}" +
-                    "and divisible by ${Lotto.PRICE_OF_TICKET}.\n",
+            "Wrong amount: $amount, Amount should be at least ${LottoMachine.PRICE_OF_TICKET} ${LottoMachine.CURRENCY}" +
+                    "and divisible by ${LottoMachine.PRICE_OF_TICKET}.\n",
         )
 
     class InvalidWinningNumbersFormatException(input: String) :

@@ -39,7 +39,7 @@ sealed class LottoException(msg: String) : IllegalArgumentException("[ERROR]: $m
                     "to ${LottoNumber.MAXIMUM_NUMBER} and different to the winning numbers.",
         )
 
-    class InvalidLottoNumber(value: Int) : LottoException(
+    class InvalidLottoNumberException(value: Int) : LottoException(
         "Invalid lotto number: '$value'. Expected a number in the range of ${LottoNumber.MINIMUM_NUMBER} " +
                 "to ${LottoNumber.MAXIMUM_NUMBER}.",
     )

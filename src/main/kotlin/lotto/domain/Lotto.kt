@@ -12,6 +12,10 @@ class Lotto(val numbers: Set<LottoNumber>) {
         require(numbers.size == LOTTO_PICK_SIZE) { throw InvalidLottoNumbersException() }
     }
 
+    fun contains(number: LottoNumber): Boolean {
+        return numbers.contains(number)
+    }
+
     override fun toString(): String {
         return numbers.joinToString(", ", "[", "]")
     }

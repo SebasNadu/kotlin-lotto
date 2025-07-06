@@ -9,15 +9,10 @@ object InputView {
         return input.trim().toIntOrNull() ?: throw LottoException.InvalidAmountFormatException(input)
     }
 
-    fun getWinningNumbers(): List<Int> {
+    fun getWinningNumbers(): Set<Int> {
         println(Constants.WINNING_NUMBERS_PROMPT)
         val input = readln()
-        return input
-            .split(',')
-            .map {
-                it.trim().toIntOrNull()
-                    ?: throw LottoException.InvalidWinningNumbersFormatException(input)
-            }
+        return parseCommaSeparatedInts(input)
     }
 
     fun getBonusNumber(): Int {
@@ -25,6 +20,13 @@ object InputView {
         val input = readln()
         return input.trim().toIntOrNull() ?: throw LottoException.InvalidBonusNumberFormatException(input)
     }
+
+    private fun parseCommaSeparatedInts(input: String): Set<Int> =
+        input.trim().split(',')
+            .map { raw ->
+                raw.trim().toIntOrNull()
+                    ?: throw LottoException.InvalidWinningNumbersFormatException(input)
+            }.toSet()
 
     object Constants {
         const val PURCHASE_PROMPT = "Please enter the purchase amount."

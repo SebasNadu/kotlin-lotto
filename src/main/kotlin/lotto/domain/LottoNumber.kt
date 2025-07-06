@@ -6,7 +6,7 @@ class LottoNumber private constructor(private val value: Int): Comparable<LottoN
 
     override fun toString(): String = value.toString()
 
-    override fun equals(other: Any?): Boolean = this == other || (other is LottoNumber && value == other.value)
+    override fun equals(other: Any?): Boolean = this === other || (other is LottoNumber && value == other.value)
 
     override fun hashCode(): Int = value
 

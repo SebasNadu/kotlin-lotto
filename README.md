@@ -9,7 +9,7 @@
 
 ### LottoNumber Class
 
-- [x] valid number in range 1 - 45
+- [x] valid number in range 1–45
 
 ### LottoMachine Class
 
@@ -22,6 +22,11 @@
 - [x] valid lotto tickets inside winning numbers class
 - [x] valid 1 bonus unique number inside winning numbers class
 
+### ResultAnalyzer Class
+
+- [x] analyze the winning numbers with the lotto tickets and return a list of Rank
+- [x] calculate the return rate based on the purchase amount and the total winning amount
+
 ### Rank
 
 - [x] return valid Rank depend on match count, bonus number and if required
@@ -29,11 +34,11 @@
 
 ### Controller
 
-- [x] Add the controller where happen the flow of the app
+- [x] Add the controller where happens the flow of the app
 - [x] Use View classes for input and output
-- [x] Create a retry help functions to validate de input and in case of error retry it.
+- [x] Create a retry help function to validate de input and in case of error, retry it.
 - [x] Create a method or service to create the Lotto tickets
-- [x] Create retry helper function to get user input
+- [x] Create a retry helper function to get user input
 - [x] Add a generateLottoTickets service
 
 ### InputView

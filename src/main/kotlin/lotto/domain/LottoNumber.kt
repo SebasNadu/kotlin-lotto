@@ -2,13 +2,15 @@ package lotto.domain
 
 import lotto.exceptions.LottoException.InvalidLottoNumber
 
-class LottoNumber private constructor(private val value: Int) {
+class LottoNumber private constructor(private val value: Int): Comparable<LottoNumber> {
 
     override fun toString(): String = value.toString()
 
     override fun equals(other: Any?): Boolean = this == other || (other is LottoNumber && value == other.value)
 
     override fun hashCode(): Int = value
+
+    override fun compareTo(other: LottoNumber): Int = value - other.value
 
     companion object {
         const val MINIMUM_NUMBER = 1

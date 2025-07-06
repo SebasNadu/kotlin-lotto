@@ -22,7 +22,5 @@ class Lotto(val numbers: Set<LottoNumber>) {
 
     companion object {
         const val LOTTO_PICK_SIZE = 6
-        const val PRICE_OF_TICKET = 1_000
-        const val CURRENCY = "KRW"
     }
 }

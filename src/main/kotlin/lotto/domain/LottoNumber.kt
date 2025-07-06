@@ -4,6 +4,8 @@ import lotto.exceptions.LottoException.InvalidLottoNumberException
 
 class LottoNumber private constructor(private val value: Int): Comparable<LottoNumber> {
 
+    fun toInt(): Int = value
+
     override fun toString(): String = value.toString()
 
     override fun equals(other: Any?): Boolean = this === other || (other is LottoNumber && value == other.value)

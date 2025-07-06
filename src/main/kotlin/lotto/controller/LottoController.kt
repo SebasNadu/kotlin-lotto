@@ -5,7 +5,7 @@ import lotto.domain.LottoMachine
 import lotto.domain.LottoNumber
 import lotto.domain.ResultAnalyzer
 import lotto.domain.WinningCombination
-import lotto.util.LottoUtils
+import lotto.exceptions.LottoException
 import lotto.view.InputView
 import lotto.view.OutputView
 
@@ -24,7 +24,7 @@ class LottoController(val lottoMachine: LottoMachine = LottoMachine()) {
 
     private fun getTickets(): Pair<Int, List<Lotto>> {
         val amount =
-            LottoUtils.retryUntilSuccess({
+            retryUntilSuccess({
                 InputView.getPurchaseAmount().also { lottoMachine.validatePurchase(it) }
             })
 
@@ -33,11 +33,25 @@ class LottoController(val lottoMachine: LottoMachine = LottoMachine()) {
     }
 
     private fun getWinningCombination(): WinningCombination {
-        val winningLotto = LottoUtils.retryUntilSuccess { Lotto.fromInts(InputView.getWinningNumbers()) }
+        val winningLotto = retryUntilSuccess { Lotto.fromInts(InputView.getWinningNumbers()) }
         val winningCombination =
-            LottoUtils.retryUntilSuccess {
+            retryUntilSuccess {
                 WinningCombination(winningLotto, LottoNumber.from(InputView.getBonusNumber()))
             }
         return winningCombination
+    }
+
+    /**
+     * Template function that accepts a lambda
+     * returns only in case of successfully
+     */
+    private fun <T> retryUntilSuccess(block: () -> T): T {
+        while (true) {
+            try {
+                return block()
+            } catch (e: LottoException) {
+                println(e.message)
+            }
+        }
     }
 }

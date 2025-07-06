@@ -3,14 +3,13 @@ package lotto.domain
 import lotto.exceptions.LottoException.InvalidAmountException
 
 class LottoMachine {
-
     fun purchase(amount: Int): List<Lotto> {
         validatePurchase(amount)
         val numberOfTickets = amount / PRICE_OF_TICKET
         return List(numberOfTickets) { generateTicket() }
     }
 
-    private fun validatePurchase(amount: Int) {
+    fun validatePurchase(amount: Int) {
         require(amount >= PRICE_OF_TICKET && amount % PRICE_OF_TICKET == 0) {
             throw InvalidAmountException(amount)
         }

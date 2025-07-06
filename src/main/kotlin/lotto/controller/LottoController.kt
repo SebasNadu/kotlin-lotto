@@ -3,10 +3,8 @@ package lotto.controller
 import lotto.domain.Lotto
 import lotto.domain.LottoMachine
 import lotto.domain.LottoNumber
-import lotto.domain.Rank
 import lotto.domain.ResultAnalyzer
 import lotto.domain.WinningCombination
-import lotto.domain.getRank
 import lotto.util.LottoUtils
 import lotto.view.InputView
 import lotto.view.OutputView
@@ -18,9 +16,10 @@ class LottoController(val lottoMachine: LottoMachine = LottoMachine()) {
         OutputView.printTickets(lottoTickets)
 
         val winningCombination = getWinningCombination()
-        val (result, returnRate) = getEvaluationResult(lottoTickets, winningCombination, amount)
+        val ticketsResult = ResultAnalyzer.evaluateTickets(lottoTickets, winningCombination)
+        val returnRate = ResultAnalyzer.calculateReturnRate(amount, ticketsResult)
 
-        OutputView.printResult(result, returnRate)
+        OutputView.printResult(ticketsResult, returnRate)
     }
 
     private fun getTickets(): Pair<Int, List<Lotto>> {
@@ -41,19 +40,4 @@ class LottoController(val lottoMachine: LottoMachine = LottoMachine()) {
             }
         return winningCombination
     }
-
-    private fun getEvaluationResult(
-        lottoTickets: List<Lotto>,
-        winningCombination: WinningCombination,
-        amount: Int,
-    ): Pair<List<Rank>, Double> {
-        val result = evaluateTickets(lottoTickets, winningCombination)
-        val returnRate = ResultAnalyzer.calculateReturnRate(amount, result)
-        return Pair(result, returnRate)
-    }
-
-    private fun evaluateTickets(
-        tickets: List<Lotto>,
-        winningCombination: WinningCombination,
-    ): List<Rank> = tickets.map { it.getRank(winningCombination) }
 }

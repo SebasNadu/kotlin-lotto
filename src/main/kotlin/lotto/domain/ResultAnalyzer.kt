@@ -10,6 +10,6 @@ object ResultAnalyzer {
 
     fun calculateReturnRate(session: PurchaseSession): Double {
         val totalPrize = session.ticketsRank.sumOf { it.winningMoney }
-        return if (totalPrize == 0) 0.0 else (totalPrize.toDouble() / session.amount) * 100.0
+        return if (totalPrize == 0) 0.0 else totalPrize.toDouble() / session.amount
     }
 }

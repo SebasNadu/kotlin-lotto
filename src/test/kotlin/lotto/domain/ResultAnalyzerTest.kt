@@ -18,7 +18,7 @@ class ResultAnalyzerTest {
         val session = PurchaseSession(amount = 10_000, ticketsRank = ticketsRank)
         val rate = ResultAnalyzer.calculateReturnRate(session)
 
-        assertThat(rate).isEqualTo(500.0)
+        assertThat(rate).isEqualTo(5.0)
     }
 
     @Test
@@ -26,7 +26,7 @@ class ResultAnalyzerTest {
         val session = PurchaseSession(amount = 10_000, ticketsRank = listOf(Rank.THIRD))
         val rate = ResultAnalyzer.calculateReturnRate(session)
 
-        assertThat(rate).isEqualTo(15000.0)
+        assertThat(rate).isEqualTo(150.0)
     }
 
     @Test
@@ -42,7 +42,7 @@ class ResultAnalyzerTest {
                     ),
             )
         val rate = ResultAnalyzer.calculateReturnRate(session)
-        assertThat(rate).isEqualTo(550.0)
+        assertThat(rate).isEqualTo(5.5)
     }
 
     @Test

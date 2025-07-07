@@ -18,17 +18,15 @@ class LottoController(
     fun run() {
         getPurchaseAmount()
         getManualTicketsAmount()
-        InputView.printGetManualTicketsHeader()
         getManualTickets()
         getAutomaticTickets()
 
         OutputView.printTickets(purchaseSession)
-//
-//        val winningCombination = getWinningCombination()
-//        val ticketsResult = ResultAnalyzer.evaluateTickets(lottoTickets, winningCombination)
-//        val returnRate = ResultAnalyzer.calculateReturnRate(amount, ticketsResult)
-//
-//        OutputView.printResult(ticketsResult, returnRate)
+
+        getWinningCombination()
+
+        getTicketsStatistics()
+        OutputView.printResult(purchaseSession)
     }
 
     private fun getPurchaseAmount() {
@@ -44,6 +42,7 @@ class LottoController(
     }
 
     private fun getManualTickets() {
+        InputView.printGetManualTicketsHeader()
         purchaseSession = purchaseSession.updateManualTickets(
             List(purchaseSession.manualTicketsNumber) {
                 retryUntilSuccess { Lotto.fromInts(InputView.getManualTicket(), LottoType.MANUAL) }
@@ -55,13 +54,20 @@ class LottoController(
         purchaseSession = lottoMachine.generateAutomaticTickets(purchaseSession)
     }
 
-    private fun getWinningCombination(): WinningCombination {
+    private fun getWinningCombination() {
         val winningLotto = retryUntilSuccess { Lotto.fromInts(InputView.getWinningNumbers()) }
         val winningCombination =
             retryUntilSuccess {
                 WinningCombination(winningLotto, LottoNumber.from(InputView.getBonusNumber()))
             }
-        return winningCombination
+        purchaseSession = purchaseSession.updateWinningCombination(winningCombination)
+    }
+
+    private fun getTicketsStatistics() {
+        val ticketsRank = ResultAnalyzer.evaluateTickets(purchaseSession)
+        purchaseSession = purchaseSession.updateTicketsRank(ticketsRank)
+        val returnRate = ResultAnalyzer.calculateReturnRate(purchaseSession)
+        purchaseSession = purchaseSession.updateReturnRate(returnRate)
     }
 
     /**

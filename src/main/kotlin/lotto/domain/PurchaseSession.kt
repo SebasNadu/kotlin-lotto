@@ -12,7 +12,7 @@ data class PurchaseSession(
     val automaticTickets: List<Lotto> = emptyList(),
     val manualTickets: List<Lotto> = emptyList(),
     val winningCombination: WinningCombination? = null,
-    val ticketsResult: List<Rank> = emptyList(),
+    val ticketsRank: List<Rank> = emptyList(),
     val returnRate: Double = 0.0,
 ) {
     val automaticTicketsNumber: Int
@@ -47,4 +47,10 @@ data class PurchaseSession(
         }
         return copy(automaticTickets = automaticTickets)
     }
+
+    fun updateWinningCombination(winningCombination: WinningCombination) = copy(winningCombination = winningCombination)
+
+    fun updateTicketsRank(ticketsRank: List<Rank>): PurchaseSession = copy(ticketsRank = ticketsRank)
+
+    fun updateReturnRate(returnRate: Double): PurchaseSession = copy(returnRate = returnRate)
 }

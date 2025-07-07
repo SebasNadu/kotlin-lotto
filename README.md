@@ -17,7 +17,8 @@
 - [x] validate Purchase Amount
 - [x] generate Lotto tickets from the purchase amount
 - [x] minimum ticket: 1000 KRW
-- [ ] LottoMachine handle manual and automatic tickets generation
+- [x] Automatic tickets generation
+- [x] LottoMachine has the amount 
 
 ### WinningNumbers Class
 
@@ -38,6 +39,7 @@
 
 - [x] Add a class that wraps the information about the purchase
 - [x] Should contain the purchase amount, manual tickets, automatic tickets etc..
+- [ ] Should have methods to update the values creating a deep copy, for immutability
 
 ### Controller
 
@@ -46,7 +48,6 @@
 - [x] Create a retry help function to validate de input and in case of error, retry it.
 - [x] Create a method or service to create the Lotto tickets
 - [x] Create a retry helper function to get user input
-- [x] Add a generateLottoTickets service
 
 ### InputView
 

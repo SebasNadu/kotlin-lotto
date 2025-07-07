@@ -1,17 +1,16 @@
 package lotto.view
 
-import lotto.domain.Lotto
 import lotto.domain.LottoMachine
+import lotto.domain.PurchaseSession
 import lotto.domain.Rank
 
 object OutputView {
-    private const val TICKETS_NUMBERS_PROMPT = "You have purchased"
     private const val TITLE_OF_RESULT_PROMPT = "Winning Statistics\n------------------"
     private const val TOTAL_RETURN_PROMPT = "Total return rate is"
 
-    fun printTickets(tickets: List<Lotto>) {
-        println(formatTicketHeader(tickets.size))
-        tickets.forEach(::println)
+    fun printTickets(session: PurchaseSession) {
+        println(formatTicketHeader(session))
+        session.allTickets.forEach(::println)
     }
 
     fun printResult(
@@ -27,8 +26,10 @@ object OutputView {
         println("[ERROR]: $message")
     }
 
-    private fun formatTicketHeader(count: Int): String {
-        return "$TICKETS_NUMBERS_PROMPT $count ${pluralizeTicket(count)}."
+    private fun formatTicketHeader(session: PurchaseSession): String {
+        return "Purchased ${session.manualTicketsNumber} manual and ${session.automaticTicketsNumber} automatic ${
+            pluralizeTicket(session.manualTicketsNumber + session.automaticTicketsNumber)
+        }."
     }
 
     private fun formatMoney(amount: Int): String = "%,d".format(amount)

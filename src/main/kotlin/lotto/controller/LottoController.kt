@@ -22,7 +22,7 @@ class LottoController(
         getManualTickets()
         getAutomaticTickets()
 
-//        OutputView.printTickets(lottoTickets)
+        OutputView.printTickets(purchaseSession)
 //
 //        val winningCombination = getWinningCombination()
 //        val ticketsResult = ResultAnalyzer.evaluateTickets(lottoTickets, winningCombination)

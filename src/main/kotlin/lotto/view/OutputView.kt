@@ -13,13 +13,10 @@ object OutputView {
         session.allTickets.forEach(::println)
     }
 
-    fun printResult(
-        ranks: List<Rank>,
-        returnRate: Double,
-    ) {
+    fun printResult(session: PurchaseSession) {
         println(TITLE_OF_RESULT_PROMPT)
-        Rank.entries.filter { it != Rank.MISS }.reversed().forEach { printResultLine(it, ranks) }
-        println("$TOTAL_RETURN_PROMPT ${"%.2f".format(returnRate)}")
+        Rank.entries.filter { it != Rank.MISS }.reversed().forEach { printResultLine(it, session.ticketsRank) }
+        println("$TOTAL_RETURN_PROMPT ${"%.2f".format(session.returnRate)}")
     }
 
     fun showErrorMessage(message: String) {

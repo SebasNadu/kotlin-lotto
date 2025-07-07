@@ -4,10 +4,10 @@ import lotto.exceptions.LottoException.*
 
 object InputView {
     private const val PURCHASE_PROMPT = "Please enter the purchase amount."
-    private const val MANUAL_TICKETS_NUMBER_PROMPT = "Enter the number of manual tickets to purchase."
-    private const val MANUAL_TICKETS_PROMPT = "Enter the numbers for manual tickets."
-    private const val WINNING_NUMBERS_PROMPT = "Please enter last week’s winning numbers."
-    private const val BONUS_NUMBER_PROMPT = "Please enter the bonus number."
+    private const val MANUAL_TICKETS_NUMBER_PROMPT = "\nEnter the number of manual tickets to purchase."
+    private const val MANUAL_TICKETS_PROMPT = "\nEnter the numbers for manual tickets."
+    private const val WINNING_NUMBERS_PROMPT = "\nPlease enter last week’s winning numbers."
+    private const val BONUS_NUMBER_PROMPT = "\nPlease enter the bonus number."
 
     fun getPurchaseAmount(): Int {
         println(PURCHASE_PROMPT)

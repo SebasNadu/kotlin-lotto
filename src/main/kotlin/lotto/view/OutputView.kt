@@ -5,7 +5,7 @@ import lotto.domain.PurchaseSession
 import lotto.domain.Rank
 
 object OutputView {
-    private const val TITLE_OF_RESULT_PROMPT = "Winning Statistics\n------------------"
+    private const val TITLE_OF_RESULT_PROMPT = "\nWinning Statistics\n------------------"
     private const val TOTAL_RETURN_PROMPT = "Total return rate is"
 
     fun printTickets(session: PurchaseSession) {
@@ -20,11 +20,11 @@ object OutputView {
     }
 
     fun showErrorMessage(message: String) {
-        println("[ERROR]: $message")
+        println(message)
     }
 
     private fun formatTicketHeader(session: PurchaseSession): String {
-        return "Purchased ${session.manualTicketsNumber} manual and ${session.automaticTicketsNumber} automatic ${
+        return "\nPurchased ${session.manualTicketsNumber} manual and ${session.automaticTicketsNumber} automatic ${
             pluralizeTicket(session.manualTicketsNumber + session.automaticTicketsNumber)
         }."
     }

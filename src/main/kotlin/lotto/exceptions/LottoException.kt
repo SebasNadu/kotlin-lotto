@@ -18,8 +18,8 @@ sealed class LottoException(msg: String) : IllegalArgumentException("[ERROR]: $m
             "${LottoNumber.MINIMUM_NUMBER} to ${LottoNumber.MAXIMUM_NUMBER}.\n",
     )
 
-    class InvalidWinningNumbersFormatException(input: String) :
-        LottoException("Invalid winning numbers format: '$input'. Expected numbers separated by commas.")
+    class InvalidNumbersFormatException(input: String) :
+        LottoException("Invalid numbers format: '$input'. Expected numbers separated by commas.")
 
     class InvalidBonusNumberFormatException(input: String) :
         LottoException(
@@ -37,4 +37,6 @@ sealed class LottoException(msg: String) : IllegalArgumentException("[ERROR]: $m
         "Invalid lotto number: '$value'. Expected a number in the range of ${LottoNumber.MINIMUM_NUMBER} " +
             "to ${LottoNumber.MAXIMUM_NUMBER}.",
     )
+
+    class InvalidManualTicketsSizeFormatException(input: String): LottoException("Invalid manual tickets number format: $input")
 }

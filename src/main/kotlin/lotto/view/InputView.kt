@@ -1,16 +1,33 @@
 package lotto.view
 
-import lotto.exceptions.LottoException
+import lotto.exceptions.LottoException.*
 
 object InputView {
     private const val PURCHASE_PROMPT = "Please enter the purchase amount."
+    private const val MANUAL_TICKETS_NUMBER_PROMPT = "Enter the number of manual tickets to purchase."
+    private const val MANUAL_TICKETS_PROMPT = "Enter the numbers for manual tickets."
     private const val WINNING_NUMBERS_PROMPT = "Please enter last week’s winning numbers."
     private const val BONUS_NUMBER_PROMPT = "Please enter the bonus number."
 
     fun getPurchaseAmount(): Int {
         println(PURCHASE_PROMPT)
         val input = readln()
-        return input.trim().toIntOrNull() ?: throw LottoException.InvalidAmountFormatException(input)
+        return input.trim().toIntOrNull() ?: throw InvalidAmountFormatException(input)
+    }
+
+    fun getManualTicketNumber(): Int {
+        println(MANUAL_TICKETS_NUMBER_PROMPT)
+        val input = readln()
+        return input.trim().toIntOrNull() ?: throw InvalidManualTicketsSizeFormatException(input)
+    }
+
+    fun printGetManualTicketsHeader() {
+        println(MANUAL_TICKETS_PROMPT)
+    }
+
+    fun getManualTicket(): Set<Int> {
+        val input = readln()
+        return parseCommaSeparatedInts(input)
     }
 
     fun getWinningNumbers(): Set<Int> {
@@ -22,13 +39,13 @@ object InputView {
     fun getBonusNumber(): Int {
         println(BONUS_NUMBER_PROMPT)
         val input = readln()
-        return input.trim().toIntOrNull() ?: throw LottoException.InvalidBonusNumberFormatException(input)
+        return input.trim().toIntOrNull() ?: throw InvalidBonusNumberFormatException(input)
     }
 
     private fun parseCommaSeparatedInts(input: String): Set<Int> =
         input.trim().split(',')
             .map { raw ->
                 raw.trim().toIntOrNull()
-                    ?: throw LottoException.InvalidWinningNumbersFormatException(input)
+                    ?: throw InvalidNumbersFormatException(input)
             }.toSet()
 }

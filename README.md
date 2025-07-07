@@ -19,6 +19,7 @@
 - [x] minimum ticket: 1000 KRW
 - [x] Automatic tickets generation
 - [x] LottoMachine has the amount 
+- [x] There is a maximum of tickets that the user can buy
 
 ### WinningNumbers Class
 
@@ -48,6 +49,7 @@
 - [x] Create a retry help function to validate de input and in case of error, retry it.
 - [x] Create a method or service to create the Lotto tickets
 - [x] Create a retry helper function to get user input
+- [x] Retry until success now has a safe limit
 
 ### InputView
 

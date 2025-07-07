@@ -6,6 +6,7 @@
 
 - [x] 6 unique numbers
 - [x] Lotto instance has toString
+- [ ] Add type automatic or manual to the class
 
 ### LottoNumber Class
 
@@ -31,6 +32,11 @@
 
 - [x] return valid Rank depend on match count, bonus number and if required
 - [x] implement valueOf
+
+### PurchaseSession
+
+- [ ] Add a class that wraps the information about the purchase
+- [ ] Should contain the purchase amount, manual tickets, automatic tickets etc..
 
 ### Controller
 

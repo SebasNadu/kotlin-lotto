@@ -39,7 +39,7 @@
 
 - [x] Add a class that wraps the information about the purchase
 - [x] Should contain the purchase amount, manual tickets, automatic tickets etc..
-- [ ] Should have methods to update the values creating a deep copy, for immutability
+- [x] Should have methods to update the values creating a deep copy, for immutability
 
 ### Controller
 
@@ -64,8 +64,8 @@
 - [x] lotto statistics
     - [x] lotto statistics with prices
     - [x] print lotto statistics
-- [ ] when the tickets are printing add a header with information about how many manual and auto tickets they are.
-- [ ] Print the return rate with more detailed message `Total return rate is 0.35 (A rate below 1 means a loss)`
+- [x] when the tickets are printing add a header with information about how many manual and auto tickets they are.
+- [x] Print the return rate with more detailed message `Total return rate is 0.35 (A rate below 1 means a loss)`
 
 ### refactors
 

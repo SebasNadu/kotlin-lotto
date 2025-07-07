@@ -17,6 +17,8 @@ data class PurchaseSession(
 ) {
     val automaticTicketsNumber: Int
         get() = allTicketsNumber - manualTicketsNumber
+    val allTickets: List<Lotto>
+        get() = manualTickets + automaticTickets
 
     fun updateAmount(amount: Int): PurchaseSession {
         require(amount >= LottoMachine.PRICE_OF_TICKET && amount % LottoMachine.PRICE_OF_TICKET == 0) {

@@ -17,15 +17,14 @@ class LottoController(
 ) {
     fun run() {
         getPurchaseAmount()
-        getManualTicketsAmount()
         getManualTickets()
         getAutomaticTickets()
 
         OutputView.printTickets(purchaseSession)
 
         getWinningCombination()
-
         getTicketsStatistics()
+
         OutputView.printResult(purchaseSession)
     }
 
@@ -42,6 +41,8 @@ class LottoController(
     }
 
     private fun getManualTickets() {
+        getManualTicketsAmount()
+
         InputView.printGetManualTicketsHeader()
         purchaseSession = purchaseSession.updateManualTickets(
             List(purchaseSession.manualTicketsNumber) {
@@ -79,7 +80,7 @@ class LottoController(
             try {
                 return block()
             } catch (e: LottoException) {
-                println(e.message)
+                OutputView.showErrorMessage(e.message ?: "Unexpected error on the retry until success.")
             }
         }
     }

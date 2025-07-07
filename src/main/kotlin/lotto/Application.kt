@@ -16,7 +16,7 @@ fun main() {
         val controller = LottoController()
         controller.run()
     } catch (e: Exception) {
-        OutputView.showErrorMessage(e.message ?: "Unexpected error occurred.")
+        OutputView.showErrorMessage(e.message ?: "[FATAL]: Unexpected error occurred.")
         exitProcess(1)
     }
 }

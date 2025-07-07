@@ -6,7 +6,7 @@
 
 - [x] 6 unique numbers
 - [x] Lotto instance has toString
-- [ ] Add type automatic or manual to the class
+- [x] Add type automatic or manual to the class
 
 ### LottoNumber Class
 
@@ -35,8 +35,8 @@
 
 ### PurchaseSession
 
-- [ ] Add a class that wraps the information about the purchase
-- [ ] Should contain the purchase amount, manual tickets, automatic tickets etc..
+- [x] Add a class that wraps the information about the purchase
+- [x] Should contain the purchase amount, manual tickets, automatic tickets etc..
 
 ### Controller
 

@@ -54,8 +54,8 @@
     - [x] Please enter the purchase amount.
     - [x] Please enter last week’s winning numbers.
     - [x] Please enter the bonus number.
-    - [ ] Enter the number of manual tickets to purchase.
-    - [ ] Enter the numbers for manual tickets.
+    - [x] Enter the number of manual tickets to purchase.
+    - [x] Enter the numbers for a manual ticket.
 
 ### OutputView
 

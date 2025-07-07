@@ -7,6 +7,7 @@ import lotto.domain.Rank
 object OutputView {
     private const val TITLE_OF_RESULT_PROMPT = "\nWinning Statistics\n------------------"
     private const val TOTAL_RETURN_PROMPT = "Total return rate is"
+    private const val TOTAL_RETURN_ENDING_PROMPT = "(A rate below 1 means a loss)"
 
     fun printTickets(session: PurchaseSession) {
         println(formatTicketHeader(session))
@@ -16,7 +17,7 @@ object OutputView {
     fun printResult(session: PurchaseSession) {
         println(TITLE_OF_RESULT_PROMPT)
         Rank.entries.filter { it != Rank.MISS }.reversed().forEach { printResultLine(it, session.ticketsRank) }
-        println("$TOTAL_RETURN_PROMPT ${"%.2f".format(session.returnRate)}")
+        println("$TOTAL_RETURN_PROMPT ${"%.2f".format(session.returnRate)} $TOTAL_RETURN_ENDING_PROMPT")
     }
 
     fun showErrorMessage(message: String) {

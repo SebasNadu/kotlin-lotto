@@ -38,6 +38,7 @@ class LottoController(
 
     private fun getManualTickets() {
         getManualTicketsAmount()
+        if (purchaseSession.manualTicketsNumber == 0) return
 
         InputView.printGetManualTicketsHeader()
         purchaseSession =

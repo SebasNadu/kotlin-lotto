@@ -17,6 +17,7 @@
 - [x] validate Purchase Amount
 - [x] generate Lotto tickets from the purchase amount
 - [x] minimum ticket: 1000 KRW
+- [ ] LottoMachine handle manual and automatic tickets generation
 
 ### WinningNumbers Class
 
@@ -53,6 +54,8 @@
     - [x] Please enter the purchase amount.
     - [x] Please enter last week’s winning numbers.
     - [x] Please enter the bonus number.
+    - [ ] Enter the number of manual tickets to purchase.
+    - [ ] Enter the numbers for manual tickets.
 
 ### OutputView
 
@@ -60,6 +63,8 @@
 - [x] lotto statistics
     - [x] lotto statistics with prices
     - [x] print lotto statistics
+- [ ] when the tickets are printing add a header with information about how many manual and auto tickets they are.
+- [ ] Print the return rate with more detailed message `Total return rate is 0.35 (A rate below 1 means a loss)`
 
 ### refactors
 

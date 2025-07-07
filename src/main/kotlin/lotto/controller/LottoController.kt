@@ -3,33 +3,56 @@ package lotto.controller
 import lotto.domain.Lotto
 import lotto.domain.LottoMachine
 import lotto.domain.LottoNumber
+import lotto.domain.LottoType
+import lotto.domain.PurchaseSession
 import lotto.domain.ResultAnalyzer
 import lotto.domain.WinningCombination
 import lotto.exceptions.LottoException
 import lotto.view.InputView
 import lotto.view.OutputView
 
-class LottoController(val lottoMachine: LottoMachine = LottoMachine()) {
+class LottoController(
+    private val lottoMachine: LottoMachine = LottoMachine(),
+    private var purchaseSession: PurchaseSession = PurchaseSession()
+) {
     fun run() {
-        val (amount, lottoTickets) = getTickets()
+        getPurchaseAmount()
+        getManualTicketsAmount()
+        InputView.printGetManualTicketsHeader()
+        getManualTickets()
+        getAutomaticTickets()
 
-        OutputView.printTickets(lottoTickets)
-
-        val winningCombination = getWinningCombination()
-        val ticketsResult = ResultAnalyzer.evaluateTickets(lottoTickets, winningCombination)
-        val returnRate = ResultAnalyzer.calculateReturnRate(amount, ticketsResult)
-
-        OutputView.printResult(ticketsResult, returnRate)
+//        OutputView.printTickets(lottoTickets)
+//
+//        val winningCombination = getWinningCombination()
+//        val ticketsResult = ResultAnalyzer.evaluateTickets(lottoTickets, winningCombination)
+//        val returnRate = ResultAnalyzer.calculateReturnRate(amount, ticketsResult)
+//
+//        OutputView.printResult(ticketsResult, returnRate)
     }
 
-    private fun getTickets(): Pair<Int, List<Lotto>> {
-        val amount =
-            retryUntilSuccess {
-                InputView.getPurchaseAmount().also { lottoMachine.validatePurchase(it) }
-            }
+    private fun getPurchaseAmount() {
+        purchaseSession = retryUntilSuccess {
+            purchaseSession.updateAmount(InputView.getPurchaseAmount())
+        }
+    }
 
-        val lottoTickets = lottoMachine.purchase(amount)
-        return Pair(amount, lottoTickets)
+    private fun getManualTicketsAmount() {
+        purchaseSession = retryUntilSuccess {
+            purchaseSession.updateManualTicketsNumber(InputView.getManualTicketNumber())
+        }
+    }
+
+    private fun getManualTickets() {
+        purchaseSession = purchaseSession.updateManualTickets(
+            List(purchaseSession.manualTicketsNumber) {
+                retryUntilSuccess { Lotto.fromInts(InputView.getManualTicket(), LottoType.MANUAL) }
+            }
+        )
+    }
+
+    private fun getAutomaticTickets() {
+        purchaseSession = lottoMachine.generateAutomaticTickets(purchaseSession)
     }
 
     private fun getWinningCombination(): WinningCombination {

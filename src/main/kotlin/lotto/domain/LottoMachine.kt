@@ -1,18 +1,13 @@
 package lotto.domain
 
+import lotto.exceptions.LottoException.InvalidManualTicketsNumberException
 import lotto.exceptions.LottoException.InvalidAmountException
 
 class LottoMachine {
-    fun purchase(amount: Int): List<Lotto> {
-        validatePurchase(amount)
-        val numberOfTickets = amount / PRICE_OF_TICKET
-        return List(numberOfTickets) { generateTicket() }
-    }
 
-    fun validatePurchase(amount: Int) {
-        require(amount >= PRICE_OF_TICKET && amount % PRICE_OF_TICKET == 0) {
-            throw InvalidAmountException(amount)
-        }
+    fun generateAutomaticTickets(session: PurchaseSession): PurchaseSession {
+        return session.updateAutomaticTickets(automaticTickets =
+            List(session.automaticTicketsNumber) { generateTicket() })
     }
 
     private fun generateTicket(): Lotto {

@@ -10,6 +10,7 @@ import lotto.domain.WinningCombination
 import lotto.exceptions.LottoException
 import lotto.view.InputView
 import lotto.view.OutputView
+import kotlin.system.exitProcess
 
 class LottoController(
     private val lottoMachine: LottoMachine = LottoMachine(),
@@ -35,13 +36,6 @@ class LottoController(
             }
     }
 
-    private fun getManualTicketsAmount() {
-        purchaseSession =
-            retryUntilSuccess {
-                purchaseSession.updateManualTicketsNumber(InputView.getManualTicketNumber())
-            }
-    }
-
     private fun getManualTickets() {
         getManualTicketsAmount()
 
@@ -53,6 +47,14 @@ class LottoController(
                 },
             )
     }
+
+    private fun getManualTicketsAmount() {
+        purchaseSession =
+            retryUntilSuccess {
+                purchaseSession.updateManualTicketsNumber(InputView.getManualTicketNumber())
+            }
+    }
+
 
     private fun getAutomaticTickets() {
         purchaseSession = lottoMachine.generateAutomaticTickets(purchaseSession)
@@ -79,12 +81,17 @@ class LottoController(
      * returns only in case of successfully
      */
     private fun <T> retryUntilSuccess(block: () -> T): T {
-        while (true) {
+         repeat(RETRY_LIMIT) {
             try {
                 return block()
             } catch (e: LottoException) {
                 OutputView.showErrorMessage(e.message ?: "Unexpected error on the retry until success.")
             }
         }
+        exitProcess(1)
+    }
+
+    companion object {
+        private const val RETRY_LIMIT = 100
     }
 }

@@ -15,6 +15,7 @@ class LottoMachine {
 
     companion object {
         const val PRICE_OF_TICKET = 1_000
+        const val MAX_AMOUNT_ACCEPTED = 100_000
         const val CURRENCY = "KRW"
         private val NUMBER_POOL = (LottoNumber.MINIMUM_NUMBER..LottoNumber.MAXIMUM_NUMBER).map(LottoNumber::from)
     }

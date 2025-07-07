@@ -10,7 +10,7 @@ sealed class LottoException(msg: String) : IllegalArgumentException("\n[ERROR]: 
     class InvalidAmountException(amount: Int) :
         LottoException(
             "Wrong amount: $amount, Amount should be at least ${LottoMachine.PRICE_OF_TICKET} ${LottoMachine.CURRENCY}" +
-                "and divisible by ${LottoMachine.PRICE_OF_TICKET}.",
+                ", divisible by ${LottoMachine.PRICE_OF_TICKET} and not bigger that 100,000.",
         )
 
     class InvalidLottoNumbersException() : LottoException(

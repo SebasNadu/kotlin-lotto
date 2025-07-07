@@ -49,4 +49,6 @@ sealed class LottoException(msg: String) : IllegalArgumentException("[ERROR]: $m
     class InvalidManualTicketsException(): LottoException("Invalid manual tickets generations.")
 
     class InvalidAutomaticTicketsException(): LottoException("Invalid automatic tickets generations.")
+
+    class InvalidTicketsEvaluation(): LottoException("Invalid ticket evaluation: Winning numbers are mandatory for the calculation.")
 }

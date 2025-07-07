@@ -56,18 +56,20 @@ class PurchaseSessionTest {
         val ticketsSize = 5
         val session1 = PurchaseSession(manualTicketsNumber = 6)
         assertThrows<LottoException> {
-            session1.updateManualTickets(List(ticketsSize) {
-                Lotto.fromInts(
-                    setOf(
-                        1,
-                        2,
-                        3,
-                        4,
-                        5,
-                        6
+            session1.updateManualTickets(
+                List(ticketsSize) {
+                    Lotto.fromInts(
+                        setOf(
+                            1,
+                            2,
+                            3,
+                            4,
+                            5,
+                            6,
+                        ),
                     )
-                )
-            })
+                },
+            )
         }
     }
 
@@ -85,18 +87,20 @@ class PurchaseSessionTest {
         val ticketsSize = 5
         val session1 = PurchaseSession(allTicketsNumber = 6)
         assertThrows<LottoException> {
-            session1.updateAutomaticTickets(List(ticketsSize) {
-                Lotto.fromInts(
-                    setOf(
-                        1,
-                        2,
-                        3,
-                        4,
-                        5,
-                        6
+            session1.updateAutomaticTickets(
+                List(ticketsSize) {
+                    Lotto.fromInts(
+                        setOf(
+                            1,
+                            2,
+                            3,
+                            4,
+                            5,
+                            6,
+                        ),
                     )
-                )
-            })
+                },
+            )
         }
     }
 }

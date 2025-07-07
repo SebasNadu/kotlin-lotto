@@ -10,12 +10,12 @@ sealed class LottoException(msg: String) : IllegalArgumentException("\n[ERROR]: 
     class InvalidAmountException(amount: Int) :
         LottoException(
             "Wrong amount: $amount, Amount should be at least ${LottoMachine.PRICE_OF_TICKET} ${LottoMachine.CURRENCY}" +
-                    "and divisible by ${LottoMachine.PRICE_OF_TICKET}.",
+                "and divisible by ${LottoMachine.PRICE_OF_TICKET}.",
         )
 
     class InvalidLottoNumbersException() : LottoException(
         "Invalid lotto numbers: Expected ${Lotto.LOTTO_PICK_SIZE} unique numbers in range " +
-                "${LottoNumber.MINIMUM_NUMBER} to ${LottoNumber.MAXIMUM_NUMBER}.",
+            "${LottoNumber.MINIMUM_NUMBER} to ${LottoNumber.MAXIMUM_NUMBER}.",
     )
 
     class InvalidNumbersFormatException(input: String) :
@@ -24,26 +24,26 @@ sealed class LottoException(msg: String) : IllegalArgumentException("\n[ERROR]: 
     class InvalidBonusNumberFormatException(input: String) :
         LottoException(
             "Invalid bonus number format: '$input'. Expected a number in the range of ${LottoNumber.MINIMUM_NUMBER} " +
-                    "to ${LottoNumber.MAXIMUM_NUMBER} and different to the winning numbers.",
+                "to ${LottoNumber.MAXIMUM_NUMBER} and different to the winning numbers.",
         )
 
     class InvalidBonusNumberException(bonusNumber: LottoNumber) :
         LottoException(
             "Invalid bonus number: '$bonusNumber'. Expected a number in the range of ${LottoNumber.MINIMUM_NUMBER} " +
-                    "to ${LottoNumber.MAXIMUM_NUMBER} and different to the winning numbers.",
+                "to ${LottoNumber.MAXIMUM_NUMBER} and different to the winning numbers.",
         )
 
     class InvalidLottoNumberException(value: Int) : LottoException(
         "Invalid lotto number: '$value'. Expected a number in the range of ${LottoNumber.MINIMUM_NUMBER} " +
-                "to ${LottoNumber.MAXIMUM_NUMBER}.",
+            "to ${LottoNumber.MAXIMUM_NUMBER}.",
     )
 
     class InvalidManualTicketsSizeFormatException(input: String) : LottoException(
-        "Invalid manual tickets number format: $input"
+        "Invalid manual tickets number format: $input",
     )
 
     class InvalidManualTicketsNumberException(amount: Int) : LottoException(
-        "Invalid amount of manual tickets: $amount: should be less or equal to the amount of purchased tickets."
+        "Invalid amount of manual tickets: $amount: should be less or equal to the amount of purchased tickets.",
     )
 
     class InvalidManualTicketsException() : LottoException("Invalid manual tickets generations.")

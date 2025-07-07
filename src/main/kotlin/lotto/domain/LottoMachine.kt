@@ -1,13 +1,11 @@
 package lotto.domain
 
-import lotto.exceptions.LottoException.InvalidManualTicketsNumberException
-import lotto.exceptions.LottoException.InvalidAmountException
-
 class LottoMachine {
-
     fun generateAutomaticTickets(session: PurchaseSession): PurchaseSession {
-        return session.updateAutomaticTickets(automaticTickets =
-            List(session.automaticTicketsNumber) { generateTicket() })
+        return session.updateAutomaticTickets(
+            automaticTickets =
+                List(session.automaticTicketsNumber) { generateTicket() },
+        )
     }
 
     private fun generateTicket(): Lotto {

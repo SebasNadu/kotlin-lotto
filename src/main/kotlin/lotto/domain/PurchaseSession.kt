@@ -1,9 +1,9 @@
 package lotto.domain
 
-import lotto.exceptions.LottoException.InvalidManualTicketsException
-import lotto.exceptions.LottoException.InvalidAutomaticTicketsException
-import lotto.exceptions.LottoException.InvalidManualTicketsNumberException
 import lotto.exceptions.LottoException.InvalidAmountException
+import lotto.exceptions.LottoException.InvalidAutomaticTicketsException
+import lotto.exceptions.LottoException.InvalidManualTicketsException
+import lotto.exceptions.LottoException.InvalidManualTicketsNumberException
 
 data class PurchaseSession(
     val amount: Int = 0,

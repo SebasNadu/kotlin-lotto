@@ -1,6 +1,9 @@
 package lotto.view
 
-import lotto.exceptions.LottoException.*
+import lotto.exceptions.LottoException.InvalidAmountFormatException
+import lotto.exceptions.LottoException.InvalidBonusNumberFormatException
+import lotto.exceptions.LottoException.InvalidManualTicketsSizeFormatException
+import lotto.exceptions.LottoException.InvalidNumbersFormatException
 
 object InputView {
     private const val PURCHASE_PROMPT = "Please enter the purchase amount."

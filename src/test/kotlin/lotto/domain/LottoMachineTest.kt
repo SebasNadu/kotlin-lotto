@@ -1,9 +1,7 @@
 package lotto.domain
 
-import lotto.exceptions.LottoException.InvalidAmountException
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
-import org.junit.jupiter.api.assertThrows
 
 class LottoMachineTest {
     private val machine = LottoMachine()

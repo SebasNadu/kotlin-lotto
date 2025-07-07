@@ -9,7 +9,10 @@ import org.junit.jupiter.api.assertThrows
 class LottoTest {
     private fun createLotto(vararg numbers: Int): Lotto = Lotto(numbers.map(LottoNumber::from).toSet())
 
-    private fun createLottoWithType(vararg numbers: Int, type: LottoType): Lotto = Lotto(numbers.map(LottoNumber::from).toSet(), type)
+    private fun createLottoWithType(
+        vararg numbers: Int,
+        type: LottoType,
+    ): Lotto = Lotto(numbers.map(LottoNumber::from).toSet(), type)
 
     @Test
     fun `should create lotto with valid numbers`() {
@@ -89,10 +92,16 @@ class LottoTest {
 
     @Test
     fun `should set the type correctly`() {
-        val ticket = createLottoWithType(
-            1, 2, 3, 4, 5, 6,
-            type = LottoType.AUTO
-        )
+        val ticket =
+            createLottoWithType(
+                1,
+                2,
+                3,
+                4,
+                5,
+                6,
+                type = LottoType.AUTO,
+            )
         assertThat(ticket.type).isEqualTo(LottoType.AUTO)
     }
 }

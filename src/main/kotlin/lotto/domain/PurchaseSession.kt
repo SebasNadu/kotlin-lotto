@@ -21,9 +21,8 @@ data class PurchaseSession(
         get() = manualTickets + automaticTickets
 
     fun updateAmount(amount: Int): PurchaseSession {
-        val condition = amount >= LottoMachine.PRICE_OF_TICKET && amount % LottoMachine.PRICE_OF_TICKET == 0 &&
-                amount <= LottoMachine.MAX_AMOUNT_ACCEPTED
-        require(condition) {
+        val condition = amount >= LottoMachine.PRICE_OF_TICKET && amount % LottoMachine.PRICE_OF_TICKET == 0
+        require(condition && amount <= LottoMachine.MAX_AMOUNT_ACCEPTED) {
             throw InvalidAmountException(amount)
         }
         return copy(amount = amount, allTicketsNumber = amount / LottoMachine.PRICE_OF_TICKET)

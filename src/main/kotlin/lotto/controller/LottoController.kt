@@ -55,7 +55,6 @@ class LottoController(
             }
     }
 
-
     private fun getAutomaticTickets() {
         purchaseSession = lottoMachine.generateAutomaticTickets(purchaseSession)
     }
@@ -81,7 +80,7 @@ class LottoController(
      * returns only in case of successfully
      */
     private fun <T> retryUntilSuccess(block: () -> T): T {
-         repeat(RETRY_LIMIT) {
+        repeat(RETRY_LIMIT) {
             try {
                 return block()
             } catch (e: LottoException) {

@@ -1,13 +1,48 @@
 package lotto.domain
 
+import lotto.exceptions.LottoException.InvalidManualTicketsException
+import lotto.exceptions.LottoException.InvalidAutomaticTicketsException
+import lotto.exceptions.LottoException.InvalidManualTicketsNumberException
+import lotto.exceptions.LottoException.InvalidAmountException
+
 data class PurchaseSession(
     val amount: Int = 0,
+    val allTicketsNumber: Int = 0,
+    val manualTicketsNumber: Int = 0,
     val automaticTickets: List<Lotto> = emptyList(),
     val manualTickets: List<Lotto> = emptyList(),
-    val manualTicketsSize: Int = manualTickets.size,
-    val allTicketsSize: Int = manualTickets.size + automaticTickets.size,
-    val allTickets: List<Lotto> = automaticTickets + manualTickets,
     val winningCombination: WinningCombination? = null,
     val ticketsResult: List<Rank> = emptyList(),
     val returnRate: Double = 0.0,
-)
+) {
+    val automaticTicketsNumber: Int
+        get() = allTicketsNumber - manualTicketsNumber
+
+    fun updateAmount(amount: Int): PurchaseSession {
+        require(amount >= LottoMachine.PRICE_OF_TICKET && amount % LottoMachine.PRICE_OF_TICKET == 0) {
+            throw InvalidAmountException(amount)
+        }
+        return copy(amount = amount, allTicketsNumber = amount / LottoMachine.PRICE_OF_TICKET)
+    }
+
+    fun updateManualTicketsNumber(count: Int): PurchaseSession {
+        require(count <= allTicketsNumber) {
+            throw InvalidManualTicketsNumberException(count)
+        }
+        return copy(manualTicketsNumber = count)
+    }
+
+    fun updateManualTickets(manualTickets: List<Lotto>): PurchaseSession {
+        require(manualTickets.size == manualTicketsNumber) {
+            throw InvalidManualTicketsException()
+        }
+        return copy(manualTickets = manualTickets)
+    }
+
+    fun updateAutomaticTickets(automaticTickets: List<Lotto>): PurchaseSession {
+        require(automaticTickets.size == automaticTicketsNumber) {
+            throw InvalidAutomaticTicketsException()
+        }
+        return copy(automaticTickets = automaticTickets)
+    }
+}

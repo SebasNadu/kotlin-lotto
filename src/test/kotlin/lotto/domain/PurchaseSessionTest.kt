@@ -7,11 +7,13 @@ import org.junit.jupiter.api.assertThrows
 
 class PurchaseSessionTest {
     @Test
-    fun `should return a deep copy`() {
+    fun `should return a shallow copy`() {
         val session1 = PurchaseSession(amount = 1)
         val session2 = session1.copy(manualTicketsNumber = 10)
         assertThat(session2).isNotEqualTo(session1)
-        assertThat(session2.amount).isEqualTo(session1.amount)
+            .extracting { it.amount }.isEqualTo(session1.amount)
+        assertThat(session1).isNotEqualTo(session2)
+        assertThat(session1).isNotSameAs(session2)
     }
 
     @Test
@@ -23,7 +25,7 @@ class PurchaseSessionTest {
     }
 
     @Test
-    fun `should throw an exception and not update amount due a invalid amount`() {
+    fun `should throw an exception and not update amount due to an invalid amount`() {
         val session1 = PurchaseSession()
         assertThrows<LottoException> { session1.updateAmount(45100) }
     }
@@ -46,7 +48,7 @@ class PurchaseSessionTest {
     fun `should update manual tickets and return a new instance from the session`() {
         val ticketsSize = 5
         val session1 = PurchaseSession(manualTicketsNumber = 5)
-        val session2 = session1.updateManualTickets(List(ticketsSize) { Lotto.fromInts(setOf(1, 2, 3, 4, 5, 6)) })
+        val session2 = session1.updateManualTickets(List(ticketsSize) { Lotto.fromIntegers(setOf(1, 2, 3, 4, 5, 6)) })
         assertThat(session2).isNotEqualTo(session1)
         assertThat(session2.manualTickets.size).isEqualTo(ticketsSize)
     }
@@ -58,7 +60,7 @@ class PurchaseSessionTest {
         assertThrows<LottoException> {
             session1.updateManualTickets(
                 List(ticketsSize) {
-                    Lotto.fromInts(
+                    Lotto.fromIntegers(
                         setOf(
                             1,
                             2,
@@ -77,7 +79,7 @@ class PurchaseSessionTest {
     fun `should update automatic tickets and return a new instance from the session`() {
         val ticketsSize = 5
         val session1 = PurchaseSession(allTicketsNumber = 5)
-        val session2 = session1.updateAutomaticTickets(List(ticketsSize) { Lotto.fromInts(setOf(1, 2, 3, 4, 5, 6)) })
+        val session2 = session1.updateAutomaticTickets(List(ticketsSize) { Lotto.fromIntegers(setOf(1, 2, 3, 4, 5, 6)) })
         assertThat(session2).isNotEqualTo(session1)
         assertThat(session2.automaticTickets.size).isEqualTo(ticketsSize)
     }
@@ -89,7 +91,7 @@ class PurchaseSessionTest {
         assertThrows<LottoException> {
             session1.updateAutomaticTickets(
                 List(ticketsSize) {
-                    Lotto.fromInts(
+                    Lotto.fromIntegers(
                         setOf(
                             1,
                             2,

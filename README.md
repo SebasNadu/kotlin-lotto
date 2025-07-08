@@ -40,7 +40,7 @@
 
 - [x] Add a class that wraps the information about the purchase
 - [x] Should contain the purchase amount, manual tickets, automatic tickets etc..
-- [x] Should have methods to update the values creating a deep copy, for immutability
+- [x] Should have methods to update the values creating a shallow copy.
 
 ### Controller
 

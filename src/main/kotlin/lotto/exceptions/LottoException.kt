@@ -13,7 +13,7 @@ sealed class LottoException(msg: String) : IllegalArgumentException("\n[ERROR]: 
                 ", divisible by ${LottoMachine.PRICE_OF_TICKET} and not bigger that 100,000.",
         )
 
-    class InvalidLottoNumbersException() : LottoException(
+    class InvalidLottoNumbersException : LottoException(
         "Invalid lotto numbers: Expected ${Lotto.LOTTO_PICK_SIZE} unique numbers in range " +
             "${LottoNumber.MINIMUM_NUMBER} to ${LottoNumber.MAXIMUM_NUMBER}.",
     )
@@ -46,10 +46,10 @@ sealed class LottoException(msg: String) : IllegalArgumentException("\n[ERROR]: 
         "Invalid amount of manual tickets: $amount: should be less or equal to the amount of purchased tickets.",
     )
 
-    class InvalidManualTicketsException() : LottoException("Invalid manual tickets generations.")
+    class InvalidManualTicketsException : LottoException("Invalid manual tickets generations.")
 
-    class InvalidAutomaticTicketsException() : LottoException("Invalid automatic tickets generations.")
+    class InvalidAutomaticTicketsException : LottoException("Invalid automatic tickets generations.")
 
-    class InvalidTicketsEvaluation() :
+    class InvalidTicketsEvaluation :
         LottoException("Invalid ticket evaluation: Winning numbers are mandatory for the calculation.")
 }

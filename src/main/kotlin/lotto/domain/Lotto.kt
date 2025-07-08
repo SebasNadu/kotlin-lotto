@@ -23,7 +23,7 @@ class Lotto(val numbers: Set<LottoNumber>, val type: LottoType = LottoType.MANUA
     companion object {
         const val LOTTO_PICK_SIZE = 6
 
-        fun fromInts(
+        fun fromIntegers(
             numbers: Set<Int>,
             type: LottoType = LottoType.MANUAL,
         ): Lotto {

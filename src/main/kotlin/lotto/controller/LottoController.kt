@@ -44,7 +44,7 @@ class LottoController(
         purchaseSession =
             purchaseSession.updateManualTickets(
                 List(purchaseSession.manualTicketsNumber) {
-                    retryUntilSuccess { Lotto.fromInts(InputView.getManualTicket(), LottoType.MANUAL) }
+                    retryUntilSuccess { Lotto.fromIntegers(InputView.getManualTicket(), LottoType.MANUAL) }
                 },
             )
     }
@@ -61,7 +61,7 @@ class LottoController(
     }
 
     private fun getWinningCombination() {
-        val winningLotto = retryUntilSuccess { Lotto.fromInts(InputView.getWinningNumbers()) }
+        val winningLotto = retryUntilSuccess { Lotto.fromIntegers(InputView.getWinningNumbers()) }
         val winningCombination =
             retryUntilSuccess {
                 WinningCombination(winningLotto, LottoNumber.from(InputView.getBonusNumber()))

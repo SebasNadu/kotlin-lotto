@@ -7,7 +7,7 @@ import lotto.exceptions.LottoException.InvalidLottoNumbersException
  *  - contains 6 unique numbers
  *  - in range 1 to 45
  */
-class Lotto(val numbers: Set<LottoNumber>) {
+class Lotto(val numbers: Set<LottoNumber>, val type: LottoType = LottoType.MANUAL) {
     init {
         require(numbers.size == LOTTO_PICK_SIZE) { throw InvalidLottoNumbersException() }
     }
@@ -23,8 +23,11 @@ class Lotto(val numbers: Set<LottoNumber>) {
     companion object {
         const val LOTTO_PICK_SIZE = 6
 
-        fun fromInts(numbers: Set<Int>): Lotto {
-            return Lotto(numbers.map(LottoNumber::from).toSet())
+        fun fromIntegers(
+            numbers: Set<Int>,
+            type: LottoType = LottoType.MANUAL,
+        ): Lotto {
+            return Lotto(numbers.map(LottoNumber::from).toSet(), type)
         }
     }
 }

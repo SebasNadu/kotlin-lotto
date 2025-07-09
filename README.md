@@ -6,6 +6,7 @@
 
 - [x] 6 unique numbers
 - [x] Lotto instance has toString
+- [x] Add type automatic or manual to the class
 
 ### LottoNumber Class
 
@@ -16,6 +17,9 @@
 - [x] validate Purchase Amount
 - [x] generate Lotto tickets from the purchase amount
 - [x] minimum ticket: 1000 KRW
+- [x] Automatic tickets generation
+- [x] LottoMachine has the amount 
+- [x] There is a maximum of tickets that the user can buy
 
 ### WinningNumbers Class
 
@@ -32,6 +36,12 @@
 - [x] return valid Rank depend on match count, bonus number and if required
 - [x] implement valueOf
 
+### PurchaseSession
+
+- [x] Add a class that wraps the information about the purchase
+- [x] Should contain the purchase amount, manual tickets, automatic tickets etc..
+- [x] Should have methods to update the values creating a shallow copy.
+
 ### Controller
 
 - [x] Add the controller where happens the flow of the app
@@ -39,7 +49,7 @@
 - [x] Create a retry help function to validate de input and in case of error, retry it.
 - [x] Create a method or service to create the Lotto tickets
 - [x] Create a retry helper function to get user input
-- [x] Add a generateLottoTickets service
+- [x] Retry until success now has a safe limit
 
 ### InputView
 
@@ -47,6 +57,8 @@
     - [x] Please enter the purchase amount.
     - [x] Please enter last week’s winning numbers.
     - [x] Please enter the bonus number.
+    - [x] Enter the number of manual tickets to purchase.
+    - [x] Enter the numbers for a manual ticket.
 
 ### OutputView
 
@@ -54,6 +66,8 @@
 - [x] lotto statistics
     - [x] lotto statistics with prices
     - [x] print lotto statistics
+- [x] when the tickets are printing add a header with information about how many manual and auto tickets they are.
+- [x] Print the return rate with more detailed message `Total return rate is 0.35 (A rate below 1 means a loss)`
 
 ### refactors
 

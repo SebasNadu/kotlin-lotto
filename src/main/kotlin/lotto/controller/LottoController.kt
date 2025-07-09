@@ -3,42 +3,77 @@ package lotto.controller
 import lotto.domain.Lotto
 import lotto.domain.LottoMachine
 import lotto.domain.LottoNumber
+import lotto.domain.LottoType
+import lotto.domain.PurchaseSession
 import lotto.domain.ResultAnalyzer
 import lotto.domain.WinningCombination
 import lotto.exceptions.LottoException
 import lotto.view.InputView
 import lotto.view.OutputView
+import kotlin.system.exitProcess
 
-class LottoController(val lottoMachine: LottoMachine = LottoMachine()) {
+class LottoController(
+    private val lottoMachine: LottoMachine = LottoMachine(),
+    private var purchaseSession: PurchaseSession = PurchaseSession(),
+) {
     fun run() {
-        val (amount, lottoTickets) = getTickets()
+        getPurchaseAmount()
+        getManualTickets()
+        getAutomaticTickets()
 
-        OutputView.printTickets(lottoTickets)
+        OutputView.printTickets(purchaseSession)
 
-        val winningCombination = getWinningCombination()
-        val ticketsResult = ResultAnalyzer.evaluateTickets(lottoTickets, winningCombination)
-        val returnRate = ResultAnalyzer.calculateReturnRate(amount, ticketsResult)
+        getWinningCombination()
+        getTicketsStatistics()
 
-        OutputView.printResult(ticketsResult, returnRate)
+        OutputView.printResult(purchaseSession)
     }
 
-    private fun getTickets(): Pair<Int, List<Lotto>> {
-        val amount =
+    private fun getPurchaseAmount() {
+        purchaseSession =
             retryUntilSuccess {
-                InputView.getPurchaseAmount().also { lottoMachine.validatePurchase(it) }
+                purchaseSession.updateAmount(InputView.getPurchaseAmount())
             }
-
-        val lottoTickets = lottoMachine.purchase(amount)
-        return Pair(amount, lottoTickets)
     }
 
-    private fun getWinningCombination(): WinningCombination {
-        val winningLotto = retryUntilSuccess { Lotto.fromInts(InputView.getWinningNumbers()) }
+    private fun getManualTickets() {
+        getManualTicketsAmount()
+        if (purchaseSession.manualTicketsNumber == 0) return
+
+        InputView.printGetManualTicketsHeader()
+        purchaseSession =
+            purchaseSession.updateManualTickets(
+                List(purchaseSession.manualTicketsNumber) {
+                    retryUntilSuccess { Lotto.fromIntegers(InputView.getManualTicket(), LottoType.MANUAL) }
+                },
+            )
+    }
+
+    private fun getManualTicketsAmount() {
+        purchaseSession =
+            retryUntilSuccess {
+                purchaseSession.updateManualTicketsNumber(InputView.getManualTicketNumber())
+            }
+    }
+
+    private fun getAutomaticTickets() {
+        purchaseSession = lottoMachine.generateAutomaticTickets(purchaseSession)
+    }
+
+    private fun getWinningCombination() {
+        val winningLotto = retryUntilSuccess { Lotto.fromIntegers(InputView.getWinningNumbers()) }
         val winningCombination =
             retryUntilSuccess {
                 WinningCombination(winningLotto, LottoNumber.from(InputView.getBonusNumber()))
             }
-        return winningCombination
+        purchaseSession = purchaseSession.updateWinningCombination(winningCombination)
+    }
+
+    private fun getTicketsStatistics() {
+        val ticketsRank = ResultAnalyzer.evaluateTickets(purchaseSession)
+        purchaseSession = purchaseSession.updateTicketsRank(ticketsRank)
+        val returnRate = ResultAnalyzer.calculateReturnRate(purchaseSession)
+        purchaseSession = purchaseSession.updateReturnRate(returnRate)
     }
 
     /**
@@ -46,12 +81,17 @@ class LottoController(val lottoMachine: LottoMachine = LottoMachine()) {
      * returns only in case of successfully
      */
     private fun <T> retryUntilSuccess(block: () -> T): T {
-        while (true) {
+        repeat(RETRY_LIMIT) {
             try {
                 return block()
             } catch (e: LottoException) {
-                println(e.message)
+                OutputView.showErrorMessage(e.message ?: "Unexpected error on the retry until success.")
             }
         }
+        exitProcess(1)
+    }
+
+    companion object {
+        private const val RETRY_LIMIT = 100
     }
 }

@@ -1,34 +1,33 @@
 package lotto.view
 
-import lotto.domain.Lotto
 import lotto.domain.LottoMachine
+import lotto.domain.PurchaseSession
 import lotto.domain.Rank
 
 object OutputView {
-    private const val TICKETS_NUMBERS_PROMPT = "You have purchased"
-    private const val TITLE_OF_RESULT_PROMPT = "Winning Statistics\n------------------"
+    private const val TITLE_OF_RESULT_PROMPT = "\nWinning Statistics\n------------------"
     private const val TOTAL_RETURN_PROMPT = "Total return rate is"
+    private const val TOTAL_RETURN_ENDING_PROMPT = "(A rate below 1 means a loss)"
 
-    fun printTickets(tickets: List<Lotto>) {
-        println(formatTicketHeader(tickets.size))
-        tickets.forEach(::println)
+    fun printTickets(session: PurchaseSession) {
+        println(formatTicketHeader(session))
+        session.allTickets.forEach(::println)
     }
 
-    fun printResult(
-        ranks: List<Rank>,
-        returnRate: Double,
-    ) {
+    fun printResult(session: PurchaseSession) {
         println(TITLE_OF_RESULT_PROMPT)
-        Rank.entries.filter { it != Rank.MISS }.reversed().forEach { printResultLine(it, ranks) }
-        println("$TOTAL_RETURN_PROMPT ${"%.2f".format(returnRate)}")
+        Rank.entries.filter { it != Rank.MISS }.reversed().forEach { printResultLine(it, session.ticketsRank) }
+        println("$TOTAL_RETURN_PROMPT ${"%.2f".format(session.returnRate)} $TOTAL_RETURN_ENDING_PROMPT")
     }
 
     fun showErrorMessage(message: String) {
-        println("[ERROR]: $message")
+        println(message)
     }
 
-    private fun formatTicketHeader(count: Int): String {
-        return "$TICKETS_NUMBERS_PROMPT $count ${pluralizeTicket(count)}."
+    private fun formatTicketHeader(session: PurchaseSession): String {
+        return "\nPurchased ${session.manualTicketsNumber} manual and ${session.automaticTicketsNumber} automatic ${
+            pluralizeTicket(session.manualTicketsNumber + session.automaticTicketsNumber)
+        }."
     }
 
     private fun formatMoney(amount: Int): String = "%,d".format(amount)

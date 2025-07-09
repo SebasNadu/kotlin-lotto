@@ -1,18 +1,11 @@
 package lotto.domain
 
-import lotto.exceptions.LottoException.InvalidAmountException
-
 class LottoMachine {
-    fun purchase(amount: Int): List<Lotto> {
-        validatePurchase(amount)
-        val numberOfTickets = amount / PRICE_OF_TICKET
-        return List(numberOfTickets) { generateTicket() }
-    }
-
-    fun validatePurchase(amount: Int) {
-        require(amount >= PRICE_OF_TICKET && amount % PRICE_OF_TICKET == 0) {
-            throw InvalidAmountException(amount)
-        }
+    fun generateAutomaticTickets(session: PurchaseSession): PurchaseSession {
+        return session.updateAutomaticTickets(
+            automaticTickets =
+                List(session.automaticTicketsNumber) { generateTicket() },
+        )
     }
 
     private fun generateTicket(): Lotto {
@@ -22,6 +15,7 @@ class LottoMachine {
 
     companion object {
         const val PRICE_OF_TICKET = 1_000
+        const val MAX_AMOUNT_ACCEPTED = 100_000
         const val CURRENCY = "KRW"
         private val NUMBER_POOL = (LottoNumber.MINIMUM_NUMBER..LottoNumber.MAXIMUM_NUMBER).map(LottoNumber::from)
     }
